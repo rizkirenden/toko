@@ -4,6 +4,7 @@ const port = 3000;
 
 const routes = require("./routes/authRoute");
 const routes = require("./routes/registerRoute");
+const routes = require("./routes/categoryRoute");
 
 app.use(express.json());
 

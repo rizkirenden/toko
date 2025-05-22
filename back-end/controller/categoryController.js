@@ -4,7 +4,6 @@ async function createCategoryController(req, res) {
   try {
     const { category_id, name, description } = req.body;
 
-    // Validasi sederhana
     if (!category_id || !name) {
       return res.status(400).json({
         error: "category_id dan name wajib diisi",
