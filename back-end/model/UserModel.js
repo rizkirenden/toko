@@ -16,12 +16,12 @@ const UserModel = {
     return rows[0];
   },
 
-  async create({ toko_id, email, hashedPassword, verificationToken }) {
+  async create({ toko_id, email, role, hashedPassword, verificationToken }) {
     const query = `
-      INSERT INTO users (toko_id, email, password, verification_token, is_verified)
+      INSERT INTO users (toko_id, email, password, role, verification_token, is_verified)
       VALUES (?, ?, ?, ?, 0)
     `;
-    const values = [toko_id, email, hashedPassword, verificationToken];
+    const values = [toko_id, email, role, hashedPassword, verificationToken];
     const [result] = await pool.query(query, values);
     return result.insertId;
   },

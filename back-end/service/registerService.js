@@ -4,10 +4,14 @@ const UserModel = require("../model/UserModel");
 const sendVerificationEmail = require("./mailService");
 
 async function registerUser(user) {
-  const { toko_id, email, password } = user;
+  const { toko_id, email, password, role } = user;
 
-  if (!toko_id || !email || !password) {
+  if (!toko_id || !email || !password || !role) {
     throw new Error("Data tidak lengkap");
+  }
+
+  if (!["admin", "pemilik"].includes(role)) {
+    throw new Error("Role tidak valid");
   }
 
   const existingUser = await UserModel.findByEmail(email);
@@ -22,6 +26,7 @@ async function registerUser(user) {
     toko_id,
     email,
     hashedPassword,
+    role,
     verificationToken,
   });
 
