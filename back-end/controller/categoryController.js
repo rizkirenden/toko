@@ -4,9 +4,9 @@ async function createCategoryController(req, res) {
   try {
     const { name, description } = req.body;
 
-    if (!name) {
+    if (!name || !description) {
       return res.status(400).json({
-        error: "name wajib diisi",
+        error: "name dan description wajib diisi",
       });
     }
 
