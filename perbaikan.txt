@@ -1,1 +1,1 @@
-route -> app : penyesuaian route 
+lanjut ke controller -> routes -> testing postman (toko read, update, delete)
