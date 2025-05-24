@@ -1,4 +1,4 @@
-const TokoModel = require("../model/TokoModels");
+const TokoModel = require("../../model/TokoModels");
 
 async function getAllToko() {
   return await TokoModel.getAllToko();
