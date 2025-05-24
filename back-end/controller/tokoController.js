@@ -17,7 +17,7 @@ async function createTokoController(req, res) {
       });
     }
 
-    const insertId = await createtoko({
+    const insertId = await createToko({
       nama_toko,
       nama_pemilik,
       no_telp,
