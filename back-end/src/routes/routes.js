@@ -29,6 +29,7 @@ const {
 } = require("../controller/tokoController");
 
 const {
+  uploadFiles,
   getAllProductController,
   createProductController,
   updateProductController,
@@ -59,8 +60,8 @@ router.get("/tokos/:toko_id", editTokoController);
 
 // Product (Produk)
 router.get("/products", getAllProductController);
-router.post("/products", createProductController);
-router.put("/products/:product_id", updateProductController);
+router.post("/products", uploadFiles, createProductController);
+router.put("/products/:product_id", uploadFiles, updateProductController);
 router.delete("/products/:product_id", deleteProductController);
 router.get("/products/:product_id", editProductController);
 

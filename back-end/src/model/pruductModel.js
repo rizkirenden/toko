@@ -8,27 +8,72 @@ const ProductModel = {
   },
 
   async insertProduct(product) {
-    const { toko_id, category_id, name, harga, deskripsi_bahan, status } =
-      product;
-    const query = `INSERT INTO products (toko_id, category_id, name, harga, deksripsi_bahan, status) VALUES (?, ?, ?, ?, ?, ?)`;
-    const values = [toko_id, category_id, name, harga, deskripsi_bahan, status];
-    const [result] = await pool.query(query, values);
-    return result.insertId;
-  },
+    const {
+      toko_id,
+      category_id,
+      name,
+      harga,
+      deskripsi_bahan,
+      gambar,
+      video,
+      status,
+    } = product;
 
-  async updateProduct(product_id, product) {
-    const { toko_id, category_id, name, harga, deskripsi_bahan, status } =
-      product;
-    const query = `UPDATE products SET toko_id = ?, category_id = ?, name = ?, harga = ?, deskripsi_bahan = ?, status = ? WHERE product_id = ?`;
+    const query = `
+      INSERT INTO products 
+      (toko_id, category_id, name, harga, deskripsi_bahan, gambar, video, status) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
     const values = [
       toko_id,
       category_id,
       name,
       harga,
       deskripsi_bahan,
+      gambar || null,
+      video || null,
+      status,
+    ];
+    const [result] = await pool.query(query, values);
+    return result.insertId;
+  },
+
+  async updateProduct(product_id, product) {
+    const {
+      toko_id,
+      category_id,
+      name,
+      harga,
+      deskripsi_bahan,
+      gambar,
+      video,
+      status,
+    } = product;
+
+    const query = `
+      UPDATE products SET 
+      toko_id = ?, 
+      category_id = ?, 
+      name = ?, 
+      harga = ?, 
+      deskripsi_bahan = ?, 
+      gambar = ?, 
+      video = ?, 
+      status = ?
+      WHERE product_id = ?`;
+
+    const values = [
+      toko_id,
+      category_id,
+      name,
+      harga,
+      deskripsi_bahan,
+      gambar || null,
+      video || null,
       status,
       product_id,
     ];
+
     const [result] = await pool.query(query, values);
     return result.affectedRows;
   },
@@ -40,7 +85,7 @@ const ProductModel = {
   },
 
   async editProduct(product_id) {
-    const query = `SELECT * FROM prducts WHERE product_id = ?`;
+    const query = `SELECT * FROM products WHERE product_id = ?`;
     const [rows] = await pool.query(query, [product_id]);
     return rows[0];
   },

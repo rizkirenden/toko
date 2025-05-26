@@ -5,24 +5,36 @@ async function getAllProduct() {
 }
 
 async function createProduct(product) {
-  const { name, price, stock, description } = product;
+  const { toko_id, category_id, name, harga, deskripsi_bahan, status } =
+    product;
 
-  if (!name || price == null || stock == null || !description) {
-    throw new Error(
-      "VALIDATION_ERROR: Semua field wajib diisi (name, price, stock, description)"
-    );
+  if (
+    !toko_id ||
+    !category_id ||
+    !name ||
+    harga == null ||
+    !deskripsi_bahan ||
+    !status
+  ) {
+    throw new Error("VALIDATION_ERROR: Semua field wajib diisi");
   }
 
   return await ProductModel.insertProduct(product);
 }
 
 async function updateProduct(product_id, product) {
-  const { name, price, stock, description } = product;
+  const { toko_id, category_id, name, harga, deskripsi_bahan, status } =
+    product;
 
-  if (!name || price == null || stock == null || !description) {
-    throw new Error(
-      "VALIDATION_ERROR: Semua field wajib diisi (name, price, stock, description)"
-    );
+  if (
+    !toko_id ||
+    !category_id ||
+    !name ||
+    harga == null ||
+    !deskripsi_bahan ||
+    !status
+  ) {
+    throw new Error("VALIDATION_ERROR: Semua field wajib diisi");
   }
 
   const updated = await ProductModel.updateProduct(product_id, product);

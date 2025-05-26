@@ -1,3 +1,6 @@
+const multer = require("multer");
+const path = require("path");
+
 const {
   getAllProduct,
   createProduct,
@@ -5,6 +8,25 @@ const {
   deleteProduct,
   editProduct,
 } = require("../service/productService");
+
+// Setup multer storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/uploads");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Middleware untuk upload multiple fields: gambar dan video
+const uploadFiles = upload.fields([
+  { name: "gambar", maxCount: 1 },
+  { name: "video", maxCount: 1 },
+]);
 
 async function getAllProductController(req, res) {
   try {
@@ -21,7 +43,20 @@ async function getAllProductController(req, res) {
 
 async function createProductController(req, res) {
   try {
-    const insertId = await createProduct(req.body);
+    const productData = req.body;
+
+    // jika ada file upload, masukkan nama file ke productData
+    if (req.files) {
+      if (req.files.gambar) {
+        productData.gambar = req.files.gambar[0].filename;
+      }
+      if (req.files.video) {
+        productData.video = req.files.video[0].filename;
+      }
+    }
+
+    const insertId = await createProduct(productData);
+
     return res.status(201).json({
       message: "Produk berhasil dibuat",
       product_id: insertId,
@@ -38,7 +73,19 @@ async function createProductController(req, res) {
 async function updateProductController(req, res) {
   try {
     const { product_id } = req.params;
-    await updateProduct(product_id, req.body);
+    const productData = req.body;
+
+    if (req.files) {
+      if (req.files.gambar) {
+        productData.gambar = req.files.gambar[0].filename;
+      }
+      if (req.files.video) {
+        productData.video = req.files.video[0].filename;
+      }
+    }
+
+    await updateProduct(product_id, productData);
+
     return res.status(200).json({
       message: "Produk berhasil diperbarui",
     });
@@ -75,7 +122,7 @@ async function editProductController(req, res) {
     const { product_id } = req.params;
     const product = await editProduct(product_id);
     return res.status(200).json({
-      message: "Data produk berhasil didapatkan",
+      message: "Data produk berhasil diambil",
       data: product,
     });
   } catch (error) {
@@ -88,6 +135,7 @@ async function editProductController(req, res) {
 }
 
 module.exports = {
+  uploadFiles,
   getAllProductController,
   createProductController,
   updateProductController,
