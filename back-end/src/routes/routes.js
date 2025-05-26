@@ -65,7 +65,6 @@ router.get("/tokos/:toko_id", editTokoController);
 
 // Product (Produk)
 router.get("/products", getAllProductController);
-// Upload dengan multiple fields
 router.post(
   "/products",
   upload.fields([
