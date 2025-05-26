@@ -5,15 +5,36 @@ async function getAllCategory() {
 }
 
 async function createCategory(category) {
+  const { name, description } = category;
+
+  if (!name || !description) {
+    throw new Error("VALIDATION_ERROR: name dan description wajib diisi");
+  }
+
   return await CategoryModel.insertCategory(category);
 }
 
 async function updateCategory(category_id, category) {
-  return await CategoryModel.updateCategory(category_id, category);
+  const { name, description } = category;
+
+  if (!name || !description) {
+    throw new Error("VALIDATION_ERROR: name dan description wajib diisi");
+  }
+
+  const updated = await CategoryModel.updateCategory(category_id, category);
+  if (!updated) {
+    throw new Error("NOT_FOUND: Kategori tidak ditemukan");
+  }
+
+  return true;
 }
 
 async function deleteCategory(category_id) {
-  return await CategoryModel.deleteCategory(category_id);
+  const deleted = await CategoryModel.deleteCategory(category_id);
+  if (!deleted) {
+    throw new Error("NOT_FOUND: Kategori tidak ditemukan");
+  }
+  return true;
 }
 
 async function editCategory(category_id) {

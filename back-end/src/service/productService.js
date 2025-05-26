@@ -5,19 +5,47 @@ async function getAllProduct() {
 }
 
 async function createProduct(product) {
+  const { name, price, stock, description } = product;
+
+  if (!name || price == null || stock == null || !description) {
+    throw new Error(
+      "VALIDATION_ERROR: Semua field wajib diisi (name, price, stock, description)"
+    );
+  }
+
   return await ProductModel.insertProduct(product);
 }
 
 async function updateProduct(product_id, product) {
-  return await ProductModel.updateProduct(product_id, product);
+  const { name, price, stock, description } = product;
+
+  if (!name || price == null || stock == null || !description) {
+    throw new Error(
+      "VALIDATION_ERROR: Semua field wajib diisi (name, price, stock, description)"
+    );
+  }
+
+  const updated = await ProductModel.updateProduct(product_id, product);
+  if (!updated) {
+    throw new Error("NOT_FOUND: Produk tidak ditemukan");
+  }
+  return true;
 }
 
 async function deleteProduct(product_id) {
-  return await ProductModel.deleteProduct(product_id);
+  const deleted = await ProductModel.deleteProduct(product_id);
+  if (!deleted) {
+    throw new Error("NOT_FOUND: Produk tidak ditemukan");
+  }
+  return true;
 }
 
 async function editProduct(product_id) {
-  return await ProductModel.editProduct(product_id);
+  const product = await ProductModel.editProduct(product_id);
+  if (!product) {
+    throw new Error("NOT_FOUND: Produk tidak ditemukan");
+  }
+  return product;
 }
 
 module.exports = {

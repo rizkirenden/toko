@@ -34,5 +34,36 @@ async function registerUser(user) {
 
   return userId;
 }
+async function updateUser(user_id, data) {
+  const { toko_id, email, password, role } = data;
 
-module.exports = { registerUser };
+  if (!toko_id || !email || !password || !role) {
+    throw new Error("Data tidak lengkap");
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const success = await UserModel.update(user_id, {
+    toko_id,
+    email,
+    role,
+    password: hashedPassword,
+  });
+
+  if (!success) {
+    throw new Error("Gagal memperbarui user");
+  }
+
+  return true;
+}
+
+async function deleteUser(user_id) {
+  const success = await UserModel.delete(user_id);
+
+  if (!success) {
+    throw new Error("Gagal menghapus user");
+  }
+
+  return true;
+}
+
+module.exports = { registerUser, updateUser, deleteUser };

@@ -1,46 +1,46 @@
 const {
-  getAllToko,
-  createToko,
-  updateToko,
-  deleteToko,
-  editToko,
-} = require("../service/tokoService");
+  getAllProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  editProduct,
+} = require("../service/productService");
 
-async function getAllTokoController(req, res) {
+async function getAllProductController(req, res) {
   try {
-    const tokoList = await getAllToko();
+    const products = await getAllProduct();
     return res.status(200).json({
-      message: "Data toko berhasil ditampilkan",
-      data: tokoList,
+      message: "Data produk berhasil ditampilkan",
+      data: products,
     });
   } catch (error) {
-    console.error("Error saat mengambil data toko:", error);
+    console.error("Error saat mengambil data produk:", error);
     return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }
 
-async function createTokoController(req, res) {
+async function createProductController(req, res) {
   try {
-    const insertId = await createToko(req.body);
+    const insertId = await createProduct(req.body);
     return res.status(201).json({
-      message: "Toko berhasil dibuat",
-      toko_id: insertId,
+      message: "Produk berhasil dibuat",
+      product_id: insertId,
     });
   } catch (error) {
     if (error.message.startsWith("VALIDATION_ERROR")) {
       return res.status(400).json({ error: error.message.split(": ")[1] });
     }
-    console.error("Error saat membuat toko:", error);
+    console.error("Error saat membuat produk:", error);
     return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }
 
-async function updateTokoController(req, res) {
+async function updateProductController(req, res) {
   try {
-    const { toko_id } = req.params;
-    await updateToko(toko_id, req.body);
+    const { product_id } = req.params;
+    await updateProduct(product_id, req.body);
     return res.status(200).json({
-      message: "Toko berhasil diperbarui",
+      message: "Produk berhasil diperbarui",
     });
   } catch (error) {
     if (error.message.startsWith("VALIDATION_ERROR")) {
@@ -49,48 +49,48 @@ async function updateTokoController(req, res) {
     if (error.message.startsWith("NOT_FOUND")) {
       return res.status(404).json({ error: error.message.split(": ")[1] });
     }
-    console.error("Error saat memperbarui toko:", error);
+    console.error("Error saat memperbarui produk:", error);
     return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }
 
-async function deleteTokoController(req, res) {
+async function deleteProductController(req, res) {
   try {
-    const { toko_id } = req.params;
-    await deleteToko(toko_id);
+    const { product_id } = req.params;
+    await deleteProduct(product_id);
     return res.status(200).json({
-      message: "Toko berhasil dihapus",
+      message: "Produk berhasil dihapus",
     });
   } catch (error) {
     if (error.message.startsWith("NOT_FOUND")) {
       return res.status(404).json({ error: error.message.split(": ")[1] });
     }
-    console.error("Error saat menghapus toko:", error);
+    console.error("Error saat menghapus produk:", error);
     return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }
 
-async function editTokoController(req, res) {
+async function editProductController(req, res) {
   try {
-    const { toko_id } = req.params;
-    const toko = await editToko(toko_id);
+    const { product_id } = req.params;
+    const product = await editProduct(product_id);
     return res.status(200).json({
-      message: "Data toko berhasil didapatkan",
-      data: toko,
+      message: "Data produk berhasil didapatkan",
+      data: product,
     });
   } catch (error) {
     if (error.message.startsWith("NOT_FOUND")) {
       return res.status(404).json({ error: error.message.split(": ")[1] });
     }
-    console.error("Error saat mengambil data toko:", error);
+    console.error("Error saat mengambil data produk:", error);
     return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }
 
 module.exports = {
-  getAllTokoController,
-  createTokoController,
-  updateTokoController,
-  deleteTokoController,
-  editTokoController,
+  getAllProductController,
+  createProductController,
+  updateProductController,
+  deleteProductController,
+  editProductController,
 };

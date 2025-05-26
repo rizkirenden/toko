@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { registerUserController } = require("../controller/registerController");
+const {
+  registerUserController,
+  updateUserController,
+  deleteUserController,
+} = require("../controller/registerController");
 const {
   verifyEmailController,
 } = require("../controller/verifyEmailController");
@@ -10,12 +14,15 @@ const {
   createCategoryController,
   updateCategoryController,
   deleteCategoryController,
-} = require("../controller/categoryController");
+} = require("../controller/categoryController.js");
 const { createTokoController } = require("../controller/tokoController");
 
-router.post("/register", registerUserController);
-router.get("/verify-email", verifyEmailController);
 router.post("/login", loginController);
+
+router.post("/register", registerUserController);
+router.put("/users/:id", updateUserController);
+router.delete("/users/:id", deleteUserController);
+router.get("/verify-email", verifyEmailController);
 
 router.get("/category", getAllCategoryController);
 router.post("/create-category", createCategoryController);
