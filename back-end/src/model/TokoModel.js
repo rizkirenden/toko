@@ -2,7 +2,7 @@ const pool = require("../config/database");
 
 const TokoModel = {
   async getAllToko() {
-    const query = "SELECT * FROM tokos";
+    const query = `SELECT * FROM tokos`;
     const [rows] = await pool.query(query);
     return rows;
   },
