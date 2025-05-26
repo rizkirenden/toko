@@ -3,6 +3,7 @@ const {
   createCategory,
   updateCategory,
   deleteCategory,
+  editCategory,
 } = require("../service/categoryService");
 
 async function getAllCategoryController(req, res) {
@@ -65,9 +66,28 @@ async function deleteCategoryController(req, res) {
   }
 }
 
+async function editCategoryController(req, res) {
+  try {
+    const category = await editCategory(req.params.category_id);
+
+    if (!category) {
+      return res.status(404).json({ error: "Kategori tidak ditemukan" });
+    }
+
+    return res.status(200).json({
+      message: "Data kategori berhasil diambil",
+      data: category,
+    });
+  } catch (error) {
+    console.error("Error saat mengambil data kategori:", error);
+    return res.status(500).json({ error: "Terjadi kesalahan pada server" });
+  }
+}
+
 module.exports = {
   getAllCategoryController,
   createCategoryController,
   updateCategoryController,
   deleteCategoryController,
+  editCategoryController,
 };

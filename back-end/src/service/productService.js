@@ -5,15 +5,25 @@ async function getAllProduct() {
 }
 
 async function createProduct(product) {
-  const { toko_id, category_id, name, harga, deskripsi_bahan, status } =
-    product;
+  const {
+    toko_id,
+    category_id,
+    name,
+    harga,
+    deskripsi_bahan,
+    gambar_product,
+    video_product,
+    status,
+  } = product;
 
   if (
     !toko_id ||
     !category_id ||
     !name ||
-    harga == null ||
+    !harga ||
     !deskripsi_bahan ||
+    !gambar_product ||
+    !video_product ||
     !status
   ) {
     throw new Error("VALIDATION_ERROR: Semua field wajib diisi");
@@ -23,15 +33,25 @@ async function createProduct(product) {
 }
 
 async function updateProduct(product_id, product) {
-  const { toko_id, category_id, name, harga, deskripsi_bahan, status } =
-    product;
+  const {
+    toko_id,
+    category_id,
+    name,
+    harga,
+    deskripsi_bahan,
+    gambar_product,
+    video_product,
+    status,
+  } = product;
 
   if (
     !toko_id ||
     !category_id ||
     !name ||
-    harga == null ||
+    !harga ||
     !deskripsi_bahan ||
+    !gambar_product ||
+    !video_product ||
     !status
   ) {
     throw new Error("VALIDATION_ERROR: Semua field wajib diisi");

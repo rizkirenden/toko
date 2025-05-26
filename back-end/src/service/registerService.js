@@ -3,6 +3,10 @@ const crypto = require("crypto");
 const UserModel = require("../model/UserModel");
 const sendVerificationEmail = require("./mailService");
 
+async function getAllUser() {
+  return await UserModel.getAllUser();
+}
+
 async function registerUser(user) {
   const { toko_id, email, password, role } = user;
 
@@ -73,4 +77,4 @@ async function editUser(user_id) {
   }
   return user;
 }
-module.exports = { registerUser, updateUser, deleteUser, editUser };
+module.exports = { getAllUser, registerUser, updateUser, deleteUser, editUser };

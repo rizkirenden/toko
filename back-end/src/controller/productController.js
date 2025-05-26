@@ -1,6 +1,3 @@
-const multer = require("multer");
-const path = require("path");
-
 const {
   getAllProduct,
   createProduct,
@@ -8,25 +5,6 @@ const {
   deleteProduct,
   editProduct,
 } = require("../service/productService");
-
-// Setup multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/uploads");
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-
-// Middleware untuk upload multiple fields: gambar dan video
-const uploadFiles = upload.fields([
-  { name: "gambar", maxCount: 1 },
-  { name: "video", maxCount: 1 },
-]);
 
 async function getAllProductController(req, res) {
   try {
@@ -45,13 +23,12 @@ async function createProductController(req, res) {
   try {
     const productData = req.body;
 
-    // jika ada file upload, masukkan nama file ke productData
     if (req.files) {
       if (req.files.gambar) {
-        productData.gambar = req.files.gambar[0].filename;
+        productData.gambar_product = req.files.gambar[0].filename;
       }
       if (req.files.video) {
-        productData.video = req.files.video[0].filename;
+        productData.video_product = req.files.video[0].filename;
       }
     }
 
@@ -77,10 +54,10 @@ async function updateProductController(req, res) {
 
     if (req.files) {
       if (req.files.gambar) {
-        productData.gambar = req.files.gambar[0].filename;
+        productData.gambar_product = req.files.gambar[0].filename;
       }
       if (req.files.video) {
-        productData.video = req.files.video[0].filename;
+        productData.video_product = req.files.video[0].filename;
       }
     }
 
@@ -135,7 +112,6 @@ async function editProductController(req, res) {
 }
 
 module.exports = {
-  uploadFiles,
   getAllProductController,
   createProductController,
   updateProductController,

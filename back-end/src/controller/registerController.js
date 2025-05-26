@@ -1,9 +1,24 @@
 const {
+  getAllUser,
   registerUser,
   updateUser,
   deleteUser,
   editUser,
 } = require("../service/registerService");
+
+async function getAllUserController(req, res) {
+  try {
+    const users = await getAllUser();
+    const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
+
+    res.status(200).json({
+      message: "Data semua user berhasil didapatkan",
+      data: usersWithoutPasswords,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Gagal mengambil data user" });   
+  }
+}
 
 async function registerUserController(req, res) {
   try {
@@ -48,7 +63,7 @@ async function editUserController(req, res) {
     const user_id = req.params.user_id;
     const user = await editUser(user_id);
 
-    delete user.password; // jangan kirim password ke client
+    delete user.password;
 
     res.status(200).json({
       message: "Data user berhasil didapatkan",
@@ -59,6 +74,7 @@ async function editUserController(req, res) {
   }
 }
 module.exports = {
+  getAllUserController,
   registerUserController,
   updateUserController,
   deleteUserController,

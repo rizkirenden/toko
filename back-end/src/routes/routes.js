@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const upload = require("../middleware/upload");
+
 const {
+  getAllUserController,
   registerUserController,
   updateUserController,
   deleteUserController,
@@ -18,6 +21,7 @@ const {
   createCategoryController,
   updateCategoryController,
   deleteCategoryController,
+  editCategoryController,
 } = require("../controller/categoryController");
 
 const {
@@ -29,7 +33,6 @@ const {
 } = require("../controller/tokoController");
 
 const {
-  uploadFiles,
   getAllProductController,
   createProductController,
   updateProductController,
@@ -39,6 +42,7 @@ const {
 
 // Auth
 router.post("/login", loginController);
+router.get("/users", getAllUserController);
 router.post("/register", registerUserController);
 router.put("/users/:user_id", updateUserController);
 router.delete("/users/:user_id", deleteUserController);
@@ -50,6 +54,7 @@ router.get("/categories", getAllCategoryController);
 router.post("/categories", createCategoryController);
 router.put("/categories/:category_id", updateCategoryController);
 router.delete("/categories/:category_id", deleteCategoryController);
+router.get("/categories/:category_id", editCategoryController);
 
 // Toko
 router.get("/tokos", getAllTokoController);
@@ -60,8 +65,25 @@ router.get("/tokos/:toko_id", editTokoController);
 
 // Product (Produk)
 router.get("/products", getAllProductController);
-router.post("/products", uploadFiles, createProductController);
-router.put("/products/:product_id", uploadFiles, updateProductController);
+// Upload dengan multiple fields
+router.post(
+  "/products",
+  upload.fields([
+    { name: "gambar", maxCount: 1 },
+    { name: "video", maxCount: 1 },
+  ]),
+  createProductController
+);
+
+router.put(
+  "/products/:product_id",
+  upload.fields([
+    { name: "gambar", maxCount: 1 },
+    { name: "video", maxCount: 1 },
+  ]),
+  updateProductController
+);
+
 router.delete("/products/:product_id", deleteProductController);
 router.get("/products/:product_id", editProductController);
 

@@ -15,6 +15,10 @@ const UserModel = {
     );
     return rows[0];
   },
+  async getAllUser() {
+    const [rows] = await pool.query("SELECT * FROM users");
+    return rows;
+  },
 
   async create({ toko_id, email, role, hashedPassword, verificationToken }) {
     const query = `
@@ -34,15 +38,18 @@ const UserModel = {
     return result.affectedRows > 0;
   },
 
-  async update(user_id, { toko_id, email, role, password }) {
+  async update(user_id, { toko_id, email, password, role }) {
     const query = `
-      UPDATE users
-      SET toko_id = ?, email = ?, role = ?, password = ?
-      WHERE user_id = ?
-    `;
-    const values = [toko_id, email, role, password, user_id];
+    UPDATE users SET 
+      toko_id = ?, 
+      email = ?, 
+      password = ?, 
+      role = ?
+    WHERE user_id = ?`;
+
+    const values = [toko_id, email, password, role, user_id];
     const [result] = await pool.query(query, values);
-    return result.affectedRows > 0;
+    return result.affectedRows;
   },
 
   async delete(user_id) {
