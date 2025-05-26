@@ -2,6 +2,7 @@ const {
   registerUser,
   updateUser,
   deleteUser,
+  editUser,
 } = require("../service/registerService");
 
 async function registerUserController(req, res) {
@@ -42,8 +43,24 @@ async function deleteUserController(req, res) {
   }
 }
 
+async function editUserController(req, res) {
+  try {
+    const user_id = req.params.user_id;
+    const user = await editUser(user_id);
+
+    delete user.password; // jangan kirim password ke client
+
+    res.status(200).json({
+      message: "Data user berhasil didapatkan",
+      data: user,
+    });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+}
 module.exports = {
   registerUserController,
   updateUserController,
   deleteUserController,
+  editUserController,
 };

@@ -66,4 +66,11 @@ async function deleteUser(user_id) {
   return true;
 }
 
-module.exports = { registerUser, updateUser, deleteUser };
+async function editUser(user_id) {
+  const user = await UserModel.editUser(user_id);
+  if (!user) {
+    throw new Error("User tidak ditemukan");
+  }
+  return user;
+}
+module.exports = { registerUser, updateUser, deleteUser, editUser };
