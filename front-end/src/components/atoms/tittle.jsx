@@ -1,5 +1,5 @@
 import React from "react";
 
-export const tittle = () => {
+export const Tittle = () => {
   return <div>tittle</div>;
 };

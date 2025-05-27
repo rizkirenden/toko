@@ -1,5 +1,5 @@
 import React from "react";
 
-export const subtittle = () => {
+export const Subtittle = () => {
   return <div>subtittle</div>;
 };
