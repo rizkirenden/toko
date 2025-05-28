@@ -6,27 +6,27 @@ import { GiShop } from "react-icons/gi";
 
 export const Navbar = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="flex items-center gap-6 p-2 bg-[#A0C878] text-white rounded-xl shadow-lg">
-        <nav className="flex items-center gap-4">
+    <div className="flex justify-center fixed top-6 inset-x-0 z-50">
+      <Card className="flex items-center justify-around px-6 py-3 bg-[#A0C878]/90 backdrop-blur-md text-white rounded-full shadow-xl w-fit">
+        <nav className="flex items-center gap-6">
           <Navitem
             label="Beranda"
-            href="/home"
+            href="/"
             text="text-sm"
-            icon={<RiHomeSmileFill size={20} />}
+            icon={<RiHomeSmileFill size={22} />}
             active
           />
           <Navitem
             label="Menu"
-            href="/menu"
+            href="/"
             text="text-sm"
-            icon={<MdRestaurantMenu size={20} />}
+            icon={<MdRestaurantMenu size={22} />}
           />
           <Navitem
             label="Toko"
-            href="/toko"
+            href="/"
             text="text-sm"
-            icon={<GiShop size={20} />}
+            icon={<GiShop size={22} />}
           />
         </nav>
       </Card>
