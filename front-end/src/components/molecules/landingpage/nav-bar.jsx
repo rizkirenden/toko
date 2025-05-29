@@ -7,7 +7,7 @@ export const Navbar = () => {
   return (
     <Card className="flex items-center justify-around py-3 bg-[#A0C878]/90 backdrop-blur-md text-white shadow-xl w-fit">
       <div className="flex items-center gap-2">
-        <img src="/assets/logo.png" alt="Logo" className="w-14 h-10" />
+        <img src="/assets/logo.png" alt="Logo" className="w-fit h-8" />
       </div>
       <nav className="flex items-center gap-6">
         <Navitem

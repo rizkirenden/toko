@@ -1,22 +1,17 @@
 import "./App.css";
-import { Infortmationdev } from "./components/molecules/landingpage/infortmation-dev";
-import { Navbar } from "./components/molecules/landingpage/nav-bar";
-import { Introduction } from "./components/molecules/landingpage/introduction";
+import Header from "./components/organisms/landingpage/header";
+import About from "./components/organisms/landingpage/about";
 import { Tokocard } from "./components/molecules/landingpage/toko-card";
 import { Menucard } from "./components/molecules/landingpage/menu-card";
-import { Imageabout } from "./components/molecules/landingpage/image-about";
-import { Aboutlist } from "./components/molecules/landingpage/about-list";
 import { Divider } from "./components/molecules/landingpage/divider";
 import { Judul } from "./components/molecules/landingpage/judul";
+
 function App() {
   return (
     <>
       <div className="">
-        <Infortmationdev />
-        <Navbar />
-        <Introduction />
-        <Imageabout />
-        <Aboutlist />
+        <Header />
+        <About />
         <Menucard />
         <Tokocard />
         <Divider />

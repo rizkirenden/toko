@@ -4,8 +4,8 @@ import { Tittle } from "../../atoms/tittle";
 
 export const Judul = ({ children }) => {
   return (
-    <Card className="relative bg-[#DDEB9D] w-32 h-10  overflow-hidden">
-      <div className="absolute inset-y-0 left-0 w-24 bg-[#A0C878] flex items-center justify-center">
+    <Card className="relative bg-[#DDEB9D] w-32 h-10 rounded-tl-full overflow-hidden">
+      <div className="absolute inset-y-0 left-0 w-24 bg-[#A0C878] flex items-center rounded-tl-full justify-center">
         <Tittle className="text-[#FFFDF6] text-center">{children}</Tittle>
       </div>
       <div className="absolute inset-y-0 right-0 w-16 overflow-hidden">
