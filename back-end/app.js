@@ -1,8 +1,16 @@
 const express = require("express");
+const cors = require("cors"); // ⬅️ Tambah ini
 const app = express();
 const port = 3000;
 
 const routes = require("./src/routes/routes");
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
