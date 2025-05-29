@@ -1,4 +1,5 @@
 import "./App.css";
+import { Infortmationdev } from "./components/molecules/landingpage/infortmation-dev";
 import { Navbar } from "./components/molecules/landingpage/nav-bar";
 import { Introduction } from "./components/molecules/landingpage/introduction";
 import { Tokocard } from "./components/molecules/landingpage/toko-card";
@@ -11,8 +12,9 @@ function App() {
   return (
     <>
       <div className="">
-        <Introduction />
+        <Infortmationdev />
         <Navbar />
+        <Introduction />
         <Imageabout />
         <Aboutlist />
         <Menucard />

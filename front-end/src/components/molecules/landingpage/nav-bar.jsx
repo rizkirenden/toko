@@ -1,35 +1,42 @@
 import { Navitem } from "../../atoms/navitem";
 import { Card } from "../../atoms/card";
-import { RiHomeSmileFill } from "react-icons/ri";
-import { MdRestaurantMenu } from "react-icons/md";
-import { GiShop } from "react-icons/gi";
+import { Icon } from "../../atoms/icon";
+import { Button } from "../../atoms/button";
 
 export const Navbar = () => {
   return (
-    <div className="flex justify-center fixed top-6 inset-x-0 z-50">
-      <Card className="flex items-center justify-around px-6 py-3 bg-[#A0C878]/90 backdrop-blur-md text-white rounded-full shadow-xl w-fit">
-        <nav className="flex items-center gap-6">
-          <Navitem
-            label="Beranda"
-            href="/"
-            text="text-sm"
-            icon={<RiHomeSmileFill size={22} />}
-            active
-          />
-          <Navitem
-            label="Menu"
-            href="/"
-            text="text-sm"
-            icon={<MdRestaurantMenu size={22} />}
-          />
-          <Navitem
-            label="Toko"
-            href="/"
-            text="text-sm"
-            icon={<GiShop size={22} />}
-          />
-        </nav>
-      </Card>
-    </div>
+    <Card className="flex items-center justify-around py-3 bg-[#A0C878]/90 backdrop-blur-md text-white shadow-xl w-fit">
+      <div className="flex items-center gap-2">
+        <img src="/assets/logo.png" alt="Logo" className="w-14 h-10" />
+      </div>
+      <nav className="flex items-center gap-6">
+        <Navitem
+          label="Beranda"
+          href="/"
+          text="text-sm"
+          icon={<Icon name="home" className="block md:hidden" />}
+          active
+        />
+        <Navitem
+          label="Menu"
+          href="/"
+          text="text-sm"
+          icon={<Icon name="menu" className="block md:hidden" />}
+        />
+        <Navitem
+          label="Toko"
+          href="/"
+          text="text-sm"
+          icon={<Icon name="shop" className="block md:hidden" />}
+        />
+      </nav>
+      <Button
+        href="/login"
+        className="flex items-center gap-2 whitespace-nowrap"
+      >
+        <Icon name="login" className="block md:hidden" />
+        <span className="hidden md:block text-sm">Login</span>
+      </Button>
+    </Card>
   );
 };
