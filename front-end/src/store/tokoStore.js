@@ -1,7 +1,7 @@
 import axios from "axios";
 import { create } from "zustand";
 
-const useMenuStore = create((set) => ({
+const useTokoStore = create((set) => ({
   menu: [],
   loading: false,
   error: null,
@@ -9,7 +9,7 @@ const useMenuStore = create((set) => ({
   fetchMenu: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get("http://localhost:3000/api/products");
+      const response = await axios.get("http://localhost:3000/api/tokos");
 
       set({ menus: response.data.data, loading: false });
     } catch (err) {
@@ -20,4 +20,4 @@ const useMenuStore = create((set) => ({
     }
   },
 }));
-export default useMenuStore;
+export default useTokoStore;

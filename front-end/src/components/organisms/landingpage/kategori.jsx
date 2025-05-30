@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Menucard } from "../../molecules/landingpage/menu-card";
+import { Categorycard } from "../../molecules/landingpage/category-card";
 import useCategoryStore from "../../../store/categoryStore";
 
 const Kategori = () => {
@@ -27,7 +27,7 @@ const Kategori = () => {
             categories.length - index
           }]`}
         >
-          <Menucard nameCategory={category.name} />
+          <Categorycard nameCategory={category.name} />
         </div>
       ))}
     </div>

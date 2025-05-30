@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "../../atoms/card";
 import { Tittle } from "../../atoms/tittle";
 
-export const Menucard = ({ nameCategory }) => {
+export const Categorycard = ({ nameCategory }) => {
   return (
     <Card className="relative bg-[#A0C878] text-white items-center text-left py-6 pl-1 rounded-tl-none rounded-bl-none rounded-tr-none rounded-br-full shadow-md w-24 h-auto overflow-hidden">
       {/* Wave SVG di atas */}
