@@ -24,7 +24,7 @@ async function createTokoController(req, res) {
     const tokoData = req.body;
 
     if (req.files && req.files.gambar && req.files.gambar[0]) {
-      tokoData.logo_toko = req.files.gambar[0].filename;
+      tokoData.toko_logo = req.files.gambar[0].filename;
     }
 
     const insertId = await createToko(tokoData);
@@ -47,7 +47,7 @@ async function updateTokoController(req, res) {
     const tokoData = req.body;
 
     if (req.files && req.files.gambar && req.files.gambar[0]) {
-      tokoData.logo_toko = req.files.gambar[0].filename;
+      tokoData.toko_logo = req.files.gambar[0].filename;
     }
 
     await updateToko(toko_id, tokoData);
