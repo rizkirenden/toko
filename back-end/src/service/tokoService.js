@@ -5,15 +5,22 @@ async function getAllToko() {
 }
 
 async function createToko(toko) {
-  const { nama_toko, nama_pemilik, no_telp, alamat_toko, alamat_pemilik } =
-    toko;
+  const {
+    nama_toko,
+    nama_pemilik,
+    no_telp,
+    alamat_toko,
+    alamat_pemilik,
+    toko_logo,
+  } = toko;
 
   if (
     !nama_toko ||
     !nama_pemilik ||
     !no_telp ||
     !alamat_toko ||
-    !alamat_pemilik
+    !alamat_pemilik ||
+    !toko_logo
   ) {
     throw new Error("VALIDATION_ERROR: Masih ada data yang kosong");
   }
@@ -22,15 +29,22 @@ async function createToko(toko) {
 }
 
 async function updateToko(toko_id, toko) {
-  const { nama_toko, nama_pemilik, no_telp, alamat_toko, alamat_pemilik } =
-    toko;
+  const {
+    nama_toko,
+    nama_pemilik,
+    no_telp,
+    alamat_toko,
+    alamat_pemilik,
+    toko_logo,
+  } = toko;
 
   if (
     !nama_toko ||
     !nama_pemilik ||
     !no_telp ||
     !alamat_toko ||
-    !alamat_pemilik
+    !alamat_pemilik ||
+    !toko_logo
   ) {
     throw new Error("VALIDATION_ERROR: Masih ada data yang kosong");
   }

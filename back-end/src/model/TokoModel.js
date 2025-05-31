@@ -8,10 +8,16 @@ const TokoModel = {
   },
 
   async insertToko(toko) {
-    const { nama_toko, nama_pemilik, no_telp, alamat_toko, alamat_pemilik } =
-      toko;
+    const {
+      nama_toko,
+      nama_pemilik,
+      no_telp,
+      alamat_toko,
+      alamat_pemilik,
+      toko_logo,
+    } = toko;
 
-    const query = ` INSERT INTO tokos (nama_toko, nama_pemilik, no_telp, alamat_toko, alamat_pemilik) VALUES (?, ?, ?, ?, ?)`;
+    const query = ` INSERT INTO tokos (nama_toko, nama_pemilik, no_telp, alamat_toko, alamat_pemilik, toko_logo) VALUES (?, ?, ?, ?, ?, ?)`;
 
     const values = [
       nama_toko,
@@ -19,21 +25,29 @@ const TokoModel = {
       no_telp,
       alamat_toko,
       alamat_pemilik,
+      toko_logo,
     ];
     const [result] = await pool.query(query, values);
     return result.insertId;
   },
 
   async updateToko(toko_id, toko) {
-    const { nama_toko, nama_pemilik, no_telp, alamat_toko, alamat_pemilik } =
-      toko;
-    const query = `UPDATE tokos SET nama_toko = ?, nama_pemilik = ?, no_telp = ?, alamat_toko = ?, alamat_pemilik = ? WHERE toko_id = ?`;
+    const {
+      nama_toko,
+      nama_pemilik,
+      no_telp,
+      alamat_toko,
+      alamat_pemilik,
+      toko_logo,
+    } = toko;
+    const query = `UPDATE tokos SET nama_toko = ?, nama_pemilik = ?, no_telp = ?, alamat_toko = ?, alamat_pemilik = ?, toko_logo = ? WHERE toko_id = ?`;
     const value = [
       nama_toko,
       nama_pemilik,
       no_telp,
       alamat_toko,
       alamat_pemilik,
+      toko_logo,
       toko_id,
     ];
     const [result] = await pool.query(query, value);

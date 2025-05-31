@@ -21,7 +21,13 @@ async function getAllTokoController(req, res) {
 
 async function createTokoController(req, res) {
   try {
-    const insertId = await createToko(req.body);
+    const tokoData = req.body;
+
+    if (req.files && req.files.gambar && req.files.gambar[0]) {
+      tokoData.logo_toko = req.files.gambar[0].filename;
+    }
+
+    const insertId = await createToko(tokoData);
     return res.status(201).json({
       message: "Toko berhasil dibuat",
       toko_id: insertId,
@@ -38,7 +44,14 @@ async function createTokoController(req, res) {
 async function updateTokoController(req, res) {
   try {
     const { toko_id } = req.params;
-    await updateToko(toko_id, req.body);
+    const tokoData = req.body;
+
+    if (req.files && req.files.gambar && req.files.gambar[0]) {
+      tokoData.logo_toko = req.files.gambar[0].filename;
+    }
+
+    await updateToko(toko_id, tokoData);
+
     return res.status(200).json({
       message: "Toko berhasil diperbarui",
     });

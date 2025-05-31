@@ -58,8 +58,16 @@ router.get("/categories/:category_id", editCategoryController);
 
 // Toko
 router.get("/tokos", getAllTokoController);
-router.post("/tokos", createTokoController);
-router.put("/tokos/:toko_id", updateTokoController);
+router.post(
+  "/tokos",
+  upload.fields([{ name: "gambar", maxCount: 1 }]),
+  createTokoController
+);
+router.put(
+  "/tokos/:toko_id",
+  upload.fields([{ name: "gambar", maxCount: 1 }]),
+  updateTokoController
+);
 router.delete("/tokos/:toko_id", deleteTokoController);
 router.get("/tokos/:toko_id", editTokoController);
 
