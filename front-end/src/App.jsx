@@ -11,6 +11,7 @@ function App() {
     <>
       <div className="">
         <Header />
+        <Divider />
         <About />
         <Divider />
         <Kategori />

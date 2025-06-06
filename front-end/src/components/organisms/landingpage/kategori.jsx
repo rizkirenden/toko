@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Categorycard } from "../../molecules/landingpage/category-card";
 import useCategoryStore from "../../../store/categoryStore";
-
+import { Judul } from "../../molecules/landingpage/judul";
 const Kategori = () => {
   const { categories, loading, error, fetchCategories } = useCategoryStore();
 
@@ -19,17 +19,27 @@ const Kategori = () => {
   if (error) return <div className="text-red-500 p-4">Error: {error}</div>;
 
   return (
-    <div className="flex flex-wrap p-4 justify-start">
-      {categories.map((category, index) => (
-        <div
-          key={category.id || category._id}
-          className={`relative ${index !== 0 ? "-ml-5" : ""} z-[${
-            categories.length - index
-          }]`}
-        >
-          <Categorycard nameCategory={category.name} />
+    <div>
+      <div className="flex items-center justify-center mb-6">
+        <Judul>Kategori</Judul>
+      </div>
+      <div className="overflow-x-auto w-full no-scrollbar">
+        <div className="flex relative w-max px-5 py-2">
+          {categories.map((category, index) => (
+            <div
+              key={category.id || category._id}
+              className={`relative ${index !== 0 ? "-ml-5" : ""} z-[${
+                categories.length - index
+              }]`}
+            >
+              <Categorycard
+                nameCategory={category.name}
+                descriptionCategory={category.description}
+              />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

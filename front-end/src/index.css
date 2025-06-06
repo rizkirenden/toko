@@ -36,3 +36,11 @@
 .animation-delay-2000 {
   animation-delay: 2s;
 }
+/* styles/global.css atau App.css */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}

@@ -1,11 +1,10 @@
 import React from "react";
 import { Card } from "../../atoms/card";
 import { Tittle } from "../../atoms/tittle";
-
-export const Categorycard = ({ nameCategory }) => {
+import { Subtittle } from "../../atoms/subtittle";
+export const Categorycard = ({ nameCategory, descriptionCategory }) => {
   return (
-    <Card className="relative bg-[#A0C878] text-white items-center text-left py-6 pl-1 rounded-tl-none rounded-bl-none rounded-tr-none rounded-br-full shadow-md w-24 h-auto overflow-hidden">
-      {/* Wave SVG di atas */}
+    <Card className="relative bg-[#A0C878] text-white items-center text-left py-6 pl-1 rounded-tl-none rounded-bl-none rounded-tr-none rounded-br-full shadow-md w-44 h-auto overflow-hidden">
       <div
         className="absolute top-0 left-0 w-full overflow-hidden leading-none"
         style={{ height: "40px" }}
@@ -26,7 +25,7 @@ export const Categorycard = ({ nameCategory }) => {
       <Tittle className="text-lg font-bold truncate mt-2">
         {nameCategory}
       </Tittle>
-      <Tittle>dsdsa</Tittle>
+      <Subtittle clasName="text-sm">{descriptionCategory}</Subtittle>
     </Card>
   );
 };
