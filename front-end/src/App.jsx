@@ -3,8 +3,8 @@ import Header from "./components/organisms/landingpage/header";
 import About from "./components/organisms/landingpage/about";
 import Kategori from "./components/organisms/landingpage/kategori";
 import { Divider } from "./components/molecules/landingpage/divider";
-import { Judul } from "./components/molecules/landingpage/judul";
 import Toko from "./components/organisms/landingpage/toko";
+import Produk from "./components/organisms/landingpage/produk";
 
 function App() {
   return (
@@ -17,7 +17,8 @@ function App() {
         <Kategori />
         <Divider />
         <Toko />
-        <Judul />
+        <Divider />
+        <Produk />
       </div>
     </>
   );
