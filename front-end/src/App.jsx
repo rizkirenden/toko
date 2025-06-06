@@ -2,9 +2,9 @@ import "./App.css";
 import Header from "./components/organisms/landingpage/header";
 import About from "./components/organisms/landingpage/about";
 import Kategori from "./components/organisms/landingpage/kategori";
-import { Tokocard } from "./components/molecules/landingpage/toko-card";
 import { Divider } from "./components/molecules/landingpage/divider";
 import { Judul } from "./components/molecules/landingpage/judul";
+import Toko from "./components/organisms/landingpage/toko";
 
 function App() {
   return (
@@ -12,9 +12,10 @@ function App() {
       <div className="">
         <Header />
         <About />
-        <Kategori />
-        <Tokocard />
         <Divider />
+        <Kategori />
+        <Divider />
+        <Toko />
         <Judul />
       </div>
     </>

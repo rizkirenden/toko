@@ -2,16 +2,16 @@ import axios from "axios";
 import { create } from "zustand";
 
 const useTokoStore = create((set) => ({
-  menu: [],
+  tokos: [], // penting: inisialisasi sebagai array
   loading: false,
   error: null,
 
-  fetchMenu: async () => {
+  fetchTokos: async () => {
     set({ loading: true, error: null });
     try {
       const response = await axios.get("http://localhost:3000/api/tokos");
 
-      set({ menus: response.data.data, loading: false });
+      set({ tokos: response.data.data, loading: false }); // perbaikan di sini
     } catch (err) {
       set({
         error: err.response?.data?.error || err.message,
@@ -20,4 +20,5 @@ const useTokoStore = create((set) => ({
     }
   },
 }));
+
 export default useTokoStore;
