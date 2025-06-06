@@ -26,6 +26,7 @@ export const Categorycard = ({ nameCategory }) => {
       <Tittle className="text-lg font-bold truncate mt-2">
         {nameCategory}
       </Tittle>
+      <Tittle>dsdsa</Tittle>
     </Card>
   );
 };
