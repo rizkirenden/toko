@@ -2,7 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 
 const useTokoStore = create((set) => ({
-  tokos: [], // penting: inisialisasi sebagai array
+  tokos: [],
   loading: false,
   error: null,
 
@@ -11,7 +11,7 @@ const useTokoStore = create((set) => ({
     try {
       const response = await axios.get("http://localhost:3000/api/tokos");
 
-      set({ tokos: response.data.data, loading: false }); // perbaikan di sini
+      set({ tokos: response.data.data, loading: false });
     } catch (err) {
       set({
         error: err.response?.data?.error || err.message,

@@ -7,7 +7,6 @@ import { TiShoppingCart } from "react-icons/ti";
 
 export const Tokocard = ({
   namaToko,
-  namaPemilik,
   no_telp,
   alamatToko,
   toko_logo,
@@ -27,12 +26,9 @@ export const Tokocard = ({
           alt="Logo Toko"
           className="w-16 h-16 object-cover rounded-full border-2 border-white mb-2"
         />
-        <Tittle className="text-2xl font-extrabold text-white mb-3 border-b-4 border-white pb-1 text-center truncate">
+        <Tittle className="text-sm font-extrabold text-white mb-3 border-b-4 border-white pb-1 text-center truncate">
           {namaToko}
         </Tittle>
-        <Subtittle className="text-sm text-white mb-1 text-center truncate">
-          <span className="font-semibold">{namaPemilik}</span>
-        </Subtittle>
         <Subtittle className="text-sm text-white mb-1 text-center truncate">
           <span className="font-semibold">{no_telp}</span>
         </Subtittle>

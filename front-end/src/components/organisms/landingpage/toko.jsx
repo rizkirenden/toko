@@ -28,7 +28,6 @@ const Toko = () => {
           <div key={toko.id || toko._id} className="relative z-[10]">
             <Tokocard
               namaToko={toko.nama_toko}
-              namaPemilik={toko.namaPemilik}
               no_telp={toko.no_telp}
               alamatToko={toko.alamatToko}
               toko_logo={toko.toko_logo}
