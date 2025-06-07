@@ -7,13 +7,8 @@ const About = () => {
   return (
     <div className="px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-center pb-6">
-          <Judul>
-            <span className="relative inline-block text-xs font-bold">
-              About Us
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300"></span>
-            </span>
-          </Judul>
+        <div className="flex items-center justify-center mb-6">
+          <Judul>About Us</Judul>
         </div>
 
         <div className="relative min-h-[300px] md:min-h-[400px]">
