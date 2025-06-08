@@ -21,11 +21,11 @@ const Toko = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center mb-6">
+      <div className="flex items-center justify-center mb-5">
         <Judul>Toko</Judul>
       </div>
 
-      <div className="overflow-x-auto w-full scrollbar-none">
+      <div className="overflow-x-auto w-full no-scrollbar">
         <div className="flex relative w-max px-5 py-2 gap-4">
           {" "}
           {/* gap di sini */}

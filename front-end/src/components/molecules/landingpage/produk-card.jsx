@@ -1,6 +1,4 @@
-// src/components/molecules/landingpage/produk-card.js
 import React, { useState } from "react";
-import { Card } from "../../atoms/card";
 
 export const Produkcard = ({
   toko_id,
@@ -17,7 +15,7 @@ export const Produkcard = ({
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#0d0d0d] to-[#1a1a1a] border border-[#A0C878]/20 hover:border-[#A0C878]/50 transition-all duration-500 shadow-[0_0_15px_rgba(160,200,120,0.1)] hover:shadow-[0_0_25px_rgba(160,200,120,0.3)]"
+      className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#0d0d0d] to-[#1a1a1a] border border-[#A0C878]/20 hover:border-[#A0C878]/50 transition-all duration-500 shadow-[0_0_15px_rgba(160,200,120,0.1)] hover:shadow-[0_0_25px_rgba(160,200,120,0.3)] h-full"
       onMouseEnter={() => {
         setShowVideo(true);
         setIsHovered(true);
@@ -45,7 +43,7 @@ export const Produkcard = ({
 
       <div className="relative z-10 h-full flex flex-col p-5">
         {/* Media container */}
-        <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] h-48 mb-4 flex items-center justify-center border border-[#A0C878]/20 group-hover:border-[#A0C878]/50 transition-all duration-500">
+        <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] aspect-video mb-4 flex items-center justify-center border border-[#A0C878]/20 group-hover:border-[#A0C878]/50 transition-all duration-500">
           {showVideo && video_product ? (
             <video
               autoPlay
@@ -128,26 +126,26 @@ export const Produkcard = ({
         </div>
 
         {/* Product info */}
-        <div className="flex-grow">
-          <h3 className="text-xl font-bold text-[#FAF6E9] mb-2 group-hover:text-[#DDEB9D] transition-colors duration-300 tracking-wide">
+        <div className="flex-grow flex flex-col">
+          <h3 className="text-lg font-bold text-[#FAF6E9] mb-2 group-hover:text-[#DDEB9D] transition-colors duration-300 tracking-wide line-clamp-2">
             {name}
           </h3>
 
-          <p className="text-sm text-[#A0C878]/80 mb-3 line-clamp-2 font-light leading-snug">
+          <p className="text-sm text-[#A0C878]/80 mb-3 line-clamp-3 font-light leading-snug">
             {deskripsi_bahan}
           </p>
 
           <div className="mt-auto">
             {/* Metadata chips */}
             <div className="flex flex-wrap gap-2 mb-3">
-              <div className="px-2.5 py-1 rounded-full bg-[#0a0a0a] text-xs text-[#A0C878]/80 border border-[#A0C878]/20">
-                STORE:{" "}
-                <span className="font-medium text-[#DDEB9D]">{toko_id}</span>
-              </div>
-              <div className="px-2.5 py-1 rounded-full bg-[#0a0a0a] text-xs text-[#A0C878]/80 border border-[#A0C878]/20">
-                CAT:{" "}
+              <div className="px-2 py-1 rounded-full bg-[#0a0a0a] text-xs text-[#A0C878]/80 border border-[#A0C878]/20 truncate">
                 <span className="font-medium text-[#DDEB9D]">
-                  {category_id}
+                  STORE: {toko_id}
+                </span>
+              </div>
+              <div className="px-2 py-1 rounded-full bg-[#0a0a0a] text-xs text-[#A0C878]/80 border border-[#A0C878]/20 truncate">
+                <span className="font-medium text-[#DDEB9D]">
+                  CAT: {category_id}
                 </span>
               </div>
             </div>
@@ -162,7 +160,7 @@ export const Produkcard = ({
                   IDR
                 </span>
               </div>
-              <p className="text-2xl font-bold text-[#DDEB9D] mt-1">
+              <p className="text-xl font-bold text-[#DDEB9D] mt-1">
                 {typeof harga === "number"
                   ? harga.toLocaleString("id-ID")
                   : harga}

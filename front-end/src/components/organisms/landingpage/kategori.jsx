@@ -20,7 +20,7 @@ const Kategori = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center mb-6">
+      <div className="flex items-center justify-center mb-5">
         <Judul>Kategori</Judul>
       </div>
       <div className="overflow-x-auto w-full no-scrollbar">
