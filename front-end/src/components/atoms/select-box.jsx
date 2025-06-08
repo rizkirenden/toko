@@ -1,4 +1,3 @@
-// src/components/atoms/SelectBox.jsx
 import React from "react";
 
 export const Selectbox = ({ options, value, onChange }) => (
