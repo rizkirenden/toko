@@ -23,10 +23,11 @@ export const Tokocard = ({
         {/* Shop logo with glow */}
         <div className="relative z-10 mx-auto mb-4 w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden group-hover:shadow-xl transition-shadow duration-300">
           <img
-            src={toko_logo}
+            src={`http://localhost:3000/uploads/${toko_logo}`} // toko_logo = '1749189714483-about.png'
             alt="Logo Toko"
             className="w-full h-full object-cover"
           />
+
           <div className="absolute inset-0 rounded-full border-2 border-white/30 pointer-events-none"></div>
         </div>
 

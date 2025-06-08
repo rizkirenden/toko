@@ -5,6 +5,7 @@ import Kategori from "./components/organisms/landingpage/kategori";
 import { Divider } from "./components/molecules/landingpage/divider";
 import Toko from "./components/organisms/landingpage/toko";
 import Produk from "./components/organisms/landingpage/produk";
+import Footer from "./components/organisms/landingpage/footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Toko />
         <Divider />
         <Produk />
+        <Footer />
       </div>
     </>
   );
