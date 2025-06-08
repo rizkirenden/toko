@@ -32,7 +32,7 @@ const NotFound = () => {
       {/* Floating Cake SVG */}
       <div className="relative w-40 h-40 mb-12">
         <img
-          src="https://cdn-icons-png.flaticon.com/512/1728/1728784.png"
+          src="/assets/logo.png"
           alt="Cake"
           className="w-full h-full object-contain drop-shadow-lg"
           style={{ animation: "floatUpDown 4s ease-in-out infinite" }}
@@ -51,17 +51,6 @@ const NotFound = () => {
       >
         Kembali
       </button>
-
-      <style>{`
-        @keyframes floatUpDown {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-      `}</style>
     </div>
   );
 };
