@@ -47,8 +47,8 @@ const Produk = () => {
           {produks.map((produk) => (
             <div key={produk.id} className="flex-shrink-0 w-56">
               <Produkcard
-                toko_id={produk.toko_id}
-                category_id={produk.category_id}
+                nama_toko={produk.nama_toko}
+                nama_kategori={produk.nama_kategori}
                 name={produk.name}
                 harga={produk.harga}
                 deskripsi_bahan={produk.deskripsi_bahan}

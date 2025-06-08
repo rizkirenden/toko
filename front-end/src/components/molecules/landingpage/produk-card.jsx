@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 export const Produkcard = ({
-  toko_id,
-  category_id,
+  nama_toko,
+  nama_kategori,
   name,
   harga,
   deskripsi_bahan,
@@ -143,12 +143,12 @@ export const Produkcard = ({
             <div className="flex flex-wrap gap-2 mb-3">
               <div className="px-2 py-1 rounded-full bg-[#0a0a0a] text-xs text-[#A0C878]/80 border border-[#A0C878]/20 truncate">
                 <span className="font-medium text-[#DDEB9D]">
-                  STORE: {toko_id}
+                  STORE: {nama_toko}
                 </span>
               </div>
               <div className="px-2 py-1 rounded-full bg-[#0a0a0a] text-xs text-[#A0C878]/80 border border-[#A0C878]/20 truncate">
                 <span className="font-medium text-[#DDEB9D]">
-                  CAT: {category_id}
+                  CAT: {nama_kategori}
                 </span>
               </div>
             </div>

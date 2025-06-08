@@ -2,7 +2,15 @@ const pool = require("../config/database");
 
 const ProductModel = {
   async getAllProduct() {
-    const query = `SELECT * FROM products`;
+    const query = `
+    SELECT 
+      products.*, 
+      tokos.nama_toko,
+      categorys.name AS nama_kategori
+    FROM products
+    JOIN tokos ON products.toko_id = tokos.toko_id
+    JOIN categorys ON products.category_id = categorys.category_id
+  `;
     const [rows] = await pool.query(query);
     return rows;
   },
