@@ -18,8 +18,8 @@ export const Navbar = () => {
           active
         />
         <Navitem
-          label="Menu"
-          href="/"
+          label="produk"
+          href="/produk"
           text="text-sm"
           icon={<Icon name="menu" className="block md:hidden" />}
         />

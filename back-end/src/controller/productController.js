@@ -8,7 +8,13 @@ const {
 
 async function getAllProductController(req, res) {
   try {
-    const products = await getAllProduct();
+    const filters = {
+      kategori: req.query.kategori || null,
+      toko: req.query.toko || null,
+      name: req.query.name || null,
+    };
+
+    const products = await getAllProduct(filters);
     return res.status(200).json({
       message: "Data produk berhasil ditampilkan",
       data: products,

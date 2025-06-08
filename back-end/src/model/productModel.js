@@ -1,17 +1,36 @@
 const pool = require("../config/database");
 
 const ProductModel = {
-  async getAllProduct() {
-    const query = `
-    SELECT 
-      products.*, 
-      tokos.nama_toko,
-      categorys.name AS nama_kategori
-    FROM products
-    JOIN tokos ON products.toko_id = tokos.toko_id
-    JOIN categorys ON products.category_id = categorys.category_id
-  `;
-    const [rows] = await pool.query(query);
+  async getAllProduct(filters = {}) {
+    let query = `
+      SELECT 
+        products.*, 
+        tokos.nama_toko,
+        categorys.name AS nama_kategori
+      FROM products
+      JOIN tokos ON products.toko_id = tokos.toko_id
+      JOIN categorys ON products.category_id = categorys.category_id
+      WHERE 1=1
+    `;
+
+    const params = [];
+
+    if (filters.kategori) {
+      query += " AND categorys.category_id = ?";
+      params.push(filters.kategori);
+    }
+
+    if (filters.toko) {
+      query += " AND tokos.toko_id = ?";
+      params.push(filters.toko);
+    }
+
+    if (filters.name) {
+      query += " AND products.name LIKE ?";
+      params.push(`%${filters.name}%`);
+    }
+
+    const [rows] = await pool.query(query, params);
     return rows;
   },
 

@@ -1,10 +1,10 @@
 import React from "react";
-import { Input } from "../components/atoms/input";
+import Produkwithfilter from "../components/organisms/produk/produk";
 
 const Playground = () => {
   return (
     <div>
-      <Input />
+      <Produkwithfilter />
     </div>
   );
 };
