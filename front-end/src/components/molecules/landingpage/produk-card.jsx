@@ -52,13 +52,16 @@ export const Produkcard = ({
               playsInline
               className="w-full h-full object-cover brightness-90 group-hover:brightness-110 transition-all duration-500"
             >
-              <source src={video_product} type="video/mp4" />
+              <source
+                src={`http://localhost:3000/uploads/${video_product}`}
+                type="video/mp4"
+              />
             </video>
           ) : (
             <>
               {gambar_product ? (
                 <img
-                  src={gambar_product}
+                  src={`http://localhost:3000/uploads/${gambar_product}`}
                   alt={name}
                   className="w-full h-full object-cover brightness-90 group-hover:brightness-110 transition-all duration-500"
                 />

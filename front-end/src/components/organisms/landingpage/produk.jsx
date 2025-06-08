@@ -43,7 +43,7 @@ const Produk = () => {
 
       {/* Container scroll horizontal mirip Toko */}
       <div className="overflow-x-auto w-full no-scrollbar">
-        <div className="flex relative w-max px-5 py-2 gap-4">
+        <div className="flex relative w-max px-5  gap-4">
           {produks.map((produk) => (
             <div key={produk.id} className="flex-shrink-0 w-56">
               <Produkcard

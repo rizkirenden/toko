@@ -24,7 +24,7 @@ const Kategori = () => {
         <Judul>Kategori</Judul>
       </div>
       <div className="overflow-x-auto w-full no-scrollbar">
-        <div className="flex relative w-max px-5 py-2">
+        <div className="flex relative w-max px-5">
           {categories.map((category, index) => (
             <div
               key={category.id || category._id}
