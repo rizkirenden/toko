@@ -2,8 +2,10 @@ import React from "react";
 import { Card } from "../../atoms/card";
 import { Tittle } from "../../atoms/tittle";
 import { Subtittle } from "../../atoms/subtittle";
+import { useNavigate } from "react-router-dom";
 
 export const Categorycard = ({ nameCategory, descriptionCategory }) => {
+  const navigate = useNavigate();
   return (
     <div className="group relative w-48 h-48 perspective-1000">
       {/* Glow effect */}
@@ -44,7 +46,10 @@ export const Categorycard = ({ nameCategory, descriptionCategory }) => {
           </Subtittle>
 
           {/* Animated button */}
-          <button className="self-start px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-300 flex items-center">
+          <button
+            onClick={() => navigate("/produk")}
+            className="self-start px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-300 flex items-center"
+          >
             Explore
             <svg
               xmlns="http://www.w3.org/2000/svg"

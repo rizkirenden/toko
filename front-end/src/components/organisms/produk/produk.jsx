@@ -28,11 +28,15 @@ const Produkwithfilter = () => {
     );
   });
 
-  const groupedByToko = filteredProduks.reduce((acc, produk) => {
+  // Group by toko -> kategori
+  const grouped = filteredProduks.reduce((acc, produk) => {
     if (!acc[produk.nama_toko]) {
-      acc[produk.nama_toko] = [];
+      acc[produk.nama_toko] = {};
     }
-    acc[produk.nama_toko].push(produk);
+    if (!acc[produk.nama_toko][produk.nama_kategori]) {
+      acc[produk.nama_toko][produk.nama_kategori] = [];
+    }
+    acc[produk.nama_toko][produk.nama_kategori].push(produk);
     return acc;
   }, {});
 
@@ -62,22 +66,32 @@ const Produkwithfilter = () => {
   return (
     <>
       <Filterproduk produks={produks} onFilterChange={setFilter} />
+
       <div className="space-y-10 px-4 mt-10 max-w-6xl mx-auto">
-        {Object.entries(groupedByToko).map(([toko, produkList]) => (
+        {Object.entries(grouped).map(([toko, kategoriObj]) => (
           <div key={toko}>
-            <h2 className="text-lg font-bold text-[#DDEB9D] mb-4">
+            <h2 className="text-2xl font-bold text-[#DDEB9D] mb-6 border-b border-[#A0C878]/20 pb-2">
               TOKO: {toko}
             </h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-              {produkList.map((produk) => (
-                <div
-                  key={produk.id}
-                  className="min-w-[250px] max-w-[300px] flex-shrink-0"
-                >
-                  <Produkcardproduk {...produk} />
+
+            {Object.entries(kategoriObj).map(([kategori, produkList]) => (
+              <div key={kategori} className="mb-10">
+                <h3 className="text-lg font-semibold text-[#A0C878] mb-3 ml-2">
+                  KATEGORI: {kategori}
+                </h3>
+
+                <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+                  {produkList.map((produk) => (
+                    <div
+                      key={produk.id}
+                      className="min-w-[250px] max-w-[300px] flex-shrink-0"
+                    >
+                      <Produkcardproduk {...produk} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         ))}
       </div>
