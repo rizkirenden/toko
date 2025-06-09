@@ -3,15 +3,16 @@ const pool = require("../config/database");
 const ProductModel = {
   async getAllProduct(filters = {}) {
     let query = `
-      SELECT 
-        products.*, 
-        tokos.nama_toko,
-        categorys.name AS nama_kategori
-      FROM products
-      JOIN tokos ON products.toko_id = tokos.toko_id
-      JOIN categorys ON products.category_id = categorys.category_id
-      WHERE 1=1
-    `;
+    SELECT 
+      products.*, 
+      tokos.nama_toko,
+      tokos.no_telp,
+      categorys.name AS nama_kategori
+    FROM products
+    JOIN tokos ON products.toko_id = tokos.toko_id
+    JOIN categorys ON products.category_id = categorys.category_id
+    WHERE 1=1
+  `;
 
     const params = [];
 

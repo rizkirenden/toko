@@ -24,8 +24,8 @@ export const Navbar = () => {
           icon={<Icon name="menu" className="block md:hidden" />}
         />
         <Navitem
-          label="Toko"
-          href="/"
+          label="toko"
+          href="/toko"
           text="text-sm"
           icon={<Icon name="shop" className="block md:hidden" />}
         />
