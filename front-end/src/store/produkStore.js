@@ -6,7 +6,6 @@ const useProdukStore = create((set) => {
     set({ loading: true, error: null });
     try {
       const params = new URLSearchParams();
-
       if (filter.kategori) params.append("kategori", filter.kategori);
       if (filter.toko) params.append("toko", filter.toko);
       if (filter.name) params.append("name", filter.name);
