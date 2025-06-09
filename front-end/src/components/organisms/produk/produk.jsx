@@ -28,6 +28,14 @@ const Produkwithfilter = () => {
     );
   });
 
+  const groupedByToko = filteredProduks.reduce((acc, produk) => {
+    if (!acc[produk.nama_toko]) {
+      acc[produk.nama_toko] = [];
+    }
+    acc[produk.nama_toko].push(produk);
+    return acc;
+  }, {});
+
   if (loading)
     return (
       <div className="flex justify-center items-center h-64">
@@ -54,10 +62,22 @@ const Produkwithfilter = () => {
   return (
     <>
       <Filterproduk produks={produks} onFilterChange={setFilter} />
-      <div className="grid grid-cols-2 justify-center items-center gap-6">
-        {filteredProduks.map((produk) => (
-          <div key={produk.id} className="w-44 h-96 mx-auto">
-            <Produkcardproduk {...produk} />
+      <div className="space-y-10 px-4 mt-10 max-w-6xl mx-auto">
+        {Object.entries(groupedByToko).map(([toko, produkList]) => (
+          <div key={toko}>
+            <h2 className="text-lg font-bold text-[#DDEB9D] mb-4">
+              TOKO: {toko}
+            </h2>
+            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+              {produkList.map((produk) => (
+                <div
+                  key={produk.id}
+                  className="min-w-[250px] max-w-[300px] flex-shrink-0"
+                >
+                  <Produkcardproduk {...produk} />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
