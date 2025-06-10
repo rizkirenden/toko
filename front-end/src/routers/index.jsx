@@ -12,7 +12,6 @@ const AppRoutes = () => {
         <Route path="/" element={<Landingpage />} />
         <Route path="/produk" element={<Produkpage />} />
         <Route path="/toko" element={<Tokopage />} />
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

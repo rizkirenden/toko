@@ -8,7 +8,6 @@ const TokopageLayout = () => {
       {/* Header */}
       <Header />
 
-      {/* Main content (ambil sisa tinggi layar dengan flex-grow) */}
       <main className="flex-grow">
         <section className="w-full">
           <div className="mb-10">

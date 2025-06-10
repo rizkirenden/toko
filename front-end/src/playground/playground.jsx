@@ -1,8 +1,16 @@
 import React from "react";
-import Produkwithfilter from "../components/organisms/produk/produk";
+import { Loginbtn } from "../components/molecules/login/login-btn";
+import { Logininput } from "../components/molecules/login/login-input";
+import { Header } from "../components/molecules/login/header";
 
 const Playground = () => {
-  return <div>toko</div>;
+  return (
+    <div className="bg-[#A0C878]">
+      <Loginbtn />
+      <Logininput />
+      <Header />
+    </div>
+  );
 };
 
 export default Playground;
