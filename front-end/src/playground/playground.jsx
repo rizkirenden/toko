@@ -5,7 +5,7 @@ import { Header } from "../components/molecules/login/header";
 
 const Playground = () => {
   return (
-    <div className="bg-[#A0C878]">
+    <div className="bg-[#A0C878] ">
       <Loginbtn />
       <Logininput />
       <Header />

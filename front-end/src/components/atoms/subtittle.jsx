@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Subtittle = ({ clasName = "", children }) => {
-  return <p className={`${clasName}`}>{children}</p>;
+export const Subtittle = ({ className = "", children }) => {
+  return <p className={`${className}`}>{children}</p>;
 };

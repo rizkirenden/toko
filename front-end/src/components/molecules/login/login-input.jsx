@@ -3,12 +3,33 @@ import { Input } from "../../atoms/input";
 
 export const Logininput = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <Input type="email" name="email" placeholder="Email" />
+    <div className="flex flex-col gap-4 text-[#5A7243]">
+      {/* Email */}
+      <div className="flex flex-col gap-1">
+        <label htmlFor="email" className="text-sm font-semibold">
+          Email
+        </label>
+        <Input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Masukkan email anda"
+          className="bg-[#FAF6E9] focus:ring-[#DDEB9D]"
+        />
       </div>
-      <div>
-        <Input type="password" name="password" placeholder="Password" />
+
+      {/* Password */}
+      <div className="flex flex-col gap-1">
+        <label htmlFor="password" className="text-sm font-semibold">
+          Password
+        </label>
+        <Input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Masukkan password"
+          className="bg-[#FAF6E9] focus:ring-[#DDEB9D]"
+        />
       </div>
     </div>
   );
