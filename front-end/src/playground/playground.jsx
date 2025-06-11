@@ -1,12 +1,15 @@
 import React from "react";
-import { Loginbtn } from "../components/molecules/login/login-btn";
-import { Logininput } from "../components/molecules/login/login-input";
-
+import { Cardkategori } from "../components/molecules/dashboard/card-kategori";
+import { Cardproduk } from "../components/molecules/dashboard/card-produk";
+import { Cardtoko } from "../components/molecules/dashboard/card-toko";
+import { Carduser } from "../components/molecules/dashboard/card-user";
 const Playground = () => {
   return (
-    <div className="bg-[#A0C878] ">
-      <Loginbtn />
-      <Logininput />
+    <div>
+      <Cardkategori />
+      <Cardproduk />
+      <Cardtoko />
+      <Carduser />
     </div>
   );
 };

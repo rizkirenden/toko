@@ -4,7 +4,6 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { GiShop } from "react-icons/gi";
 import { IoLogIn } from "react-icons/io5";
 import { FaSearchengin } from "react-icons/fa";
-
 export const Icon = ({ name, size = 20, color = "white" }) => {
   const icons = {
     home: <RiHomeSmileFill size={size} color={color} />,
