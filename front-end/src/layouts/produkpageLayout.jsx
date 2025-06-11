@@ -10,7 +10,6 @@ const ProdukpageLayout = () => {
       {/* Header */}
       <Header />
 
-      {/* Main content (ambil sisa tinggi layar dengan flex-grow) */}
       <main className="flex-grow">
         <section className="w-full">
           <div className="mb-10">
@@ -19,7 +18,6 @@ const ProdukpageLayout = () => {
         </section>
       </main>
 
-      {/* Footer selalu di bawah */}
       <Footer />
     </div>
   );

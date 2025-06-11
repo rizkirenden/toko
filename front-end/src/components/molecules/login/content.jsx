@@ -2,7 +2,7 @@ import React from "react";
 import { Tittle } from "../../atoms/tittle";
 import { Subtittle } from "../../atoms/subtittle";
 
-export const Header = () => {
+export const Content = () => {
   return (
     <div className="flex flex-col items-center gap-3 text-center mb-8 px-4">
       <img
