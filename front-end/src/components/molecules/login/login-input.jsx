@@ -1,7 +1,8 @@
 import React from "react";
 import { Input } from "../../atoms/input";
-
+import { useNavigate } from "react-router";
 export const Logininput = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-4 text-[#5A7243]">
       <div className="flex flex-col gap-1">
