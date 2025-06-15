@@ -10,9 +10,9 @@ export const Sidebar = () => {
       {/* Toggle untuk HP */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 bg-white/20 backdrop-blur-lg p-2 rounded-lg shadow-md hover:bg-white/30 transition"
+        className="bg-black md:hidden fixed top-4 left-4 z-50 bg-white/20 backdrop-blur-lg p-2 rounded-lg shadow-md hover:bg-white/30 transition"
       >
-        <Icon name="menu" className="w-6 h-6 text-white" />
+        <Icon name="sidebar" className="w-6 h-6 " color="white" />
       </button>
 
       {/* Overlay HP */}
@@ -23,7 +23,6 @@ export const Sidebar = () => {
         ></div>
       )}
 
-      {/* Sidebar HP */}
       <div
         className={`
           fixed inset-y-0 left-0 z-40
@@ -46,7 +45,7 @@ export const Sidebar = () => {
             <Navitem
               label="Dashboard"
               href="/dashboard"
-              icon={<Icon name="dashboard" />}
+              icon={<Icon name="dashboard" className="text-black" />}
             />
             <Navitem
               label="Toko"
@@ -76,7 +75,6 @@ export const Sidebar = () => {
         </div>
       </div>
 
-      {/* Navbar Laptop */}
       <nav
         className="
           hidden md:flex fixed top-0 left-0 right-0 h-16 bg-white/10 backdrop-blur-xl 
