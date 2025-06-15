@@ -8,6 +8,8 @@ import { MdDashboard } from "react-icons/md";
 import { HiBuildingStorefront } from "react-icons/hi2";
 import { LuBaggageClaim } from "react-icons/lu";
 import { VscFolderLibrary } from "react-icons/vsc";
+import { FaUsers } from "react-icons/fa";
+import { IoLogOut } from "react-icons/io5";
 export const Icon = ({ name, size = 20, color = "white" }) => {
   const icons = {
     home: <RiHomeSmileFill size={size} color={color} />,
@@ -19,6 +21,8 @@ export const Icon = ({ name, size = 20, color = "white" }) => {
     toko: <HiBuildingStorefront size={size} color={color} />,
     produk: <LuBaggageClaim size={size} color={color} />,
     kategori: <VscFolderLibrary size={size} color={color} />,
+    user: <FaUsers size={size} color={color} />,
+    logout: <IoLogOut size={size} color={color} />,
   };
 
   return icons[name] || null;
