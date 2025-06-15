@@ -12,31 +12,31 @@ export const Sidebar = () => {
       <nav>
         <Navitem
           label="dahsboard"
-          href=""
+          href="/dashboard"
           text=""
           icon={<Icon name="" className="" />}
         />
         <Navitem
           label="toko"
-          href=""
+          href="/datatoko"
           text=""
           icon={<Icon name="" className="" />}
         />
         <Navitem
           label="produk"
-          href=""
+          href="/dataproduk"
           text=""
           icon={<Icon name="" className="" />}
         />
         <Navitem
           label="category"
-          href=""
+          href="/datacategory"
           text=""
           icon={<Icon name="" className="" />}
         />
         <Navitem
           label="register"
-          href=""
+          href="/register"
           text=""
           icon={<Icon name="" className="" />}
         />
