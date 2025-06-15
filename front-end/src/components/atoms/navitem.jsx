@@ -9,7 +9,7 @@ export const Navitem = ({ label, href, icon, active = false, text = "" }) => {
       } hover:text-yellow-100 transition duration-200`}
     >
       {icon}
-      <span className={`hidden md:block ${text}`}>{label}</span>
+      <span className={`${text}`}>{label}</span>
     </a>
   );
 };
