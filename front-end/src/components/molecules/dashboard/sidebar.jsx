@@ -12,10 +12,9 @@ export const Sidebar = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="bg-black md:hidden fixed top-4 left-4 z-50 bg-white/20 backdrop-blur-lg p-2 rounded-lg shadow-md hover:bg-white/30 transition"
       >
-        <Icon name="sidebar" className="w-6 h-6 " color="white" />
+        <Icon name="sidebar" className="w-6 h-6 " color="black" />
       </button>
 
-      {/* Overlay HP */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
