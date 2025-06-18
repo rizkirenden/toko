@@ -1,17 +1,17 @@
 import React from "react";
 import { Sidebar } from "../components/molecules/dashboard/sidebar";
-import { Carduser } from "../components/molecules/dashboard/card-user";
-import { Cardtoko } from "../components/molecules/dashboard/card-toko";
 import Datakategori from "../components/organisms/dashboard/datakategori";
 import Dataproduk from "../components/organisms/dashboard/dataproduk";
+import Datauser from "../components/organisms/dashboard/datauser";
+import Datatoko from "../components/organisms/dashboard/datatoko";
 const Playground = () => {
   return (
     <div className="bg-white">
       <Sidebar />
-      <Carduser />
-      <Cardtoko />
+      <Datatoko />
       <Datakategori />
       <Dataproduk />
+      <Datauser />
     </div>
   );
 };
