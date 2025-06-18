@@ -16,7 +16,7 @@ const Datatoko = () => {
   if (error) return <div className="text-red-500 p-4">Error: {error}</div>;
   return (
     <div>
-      <Cardtoko total={tokos.lenght} />
+      <Cardtoko total={tokos.length} />
     </div>
   );
 };
