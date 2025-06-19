@@ -1,11 +1,11 @@
 import React from "react";
-import { Sidebar } from "../components/molecules/dashboard/sidebar";
-import DashboardLayout from "../layouts/dashboard/dashboardLayout";
+import { Tableheader } from "../components/molecules/dashboard/toko/tableheader";
+import Datatabelheader from "../components/organisms/dashboard/toko/datatabelheader";
 
 const Playground = () => {
   return (
     <div className="bg-white">
-      <DashboardLayout />
+      <Datatabelheader />
     </div>
   );
 };
