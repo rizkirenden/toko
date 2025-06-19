@@ -9,7 +9,7 @@ export const Cardproduk = ({ total }) => {
         <div className="flex flex-col items-center text-white space-y-2">
           <LuBaggageClaim className="text-white text-4xl" />
           <div className="text-lg font-semibold">{total}</div>
-          <Subtittle className="text-white">Total Kategori Produk</Subtittle>
+          <Subtittle className="text-white">Total Produk</Subtittle>
         </div>
       </Card>
     </div>
