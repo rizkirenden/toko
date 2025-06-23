@@ -1,5 +1,9 @@
 const TokoModel = require("../model/TokoModel");
 
+async function getAllTokos() {
+  return await TokoModel.getAllTokos();
+}
+
 async function getAllToko({ page = 1, limit = 5, search = "" } = {}) {
   return await TokoModel.getAllToko({
     limit,
@@ -78,4 +82,11 @@ async function editToko(toko_id) {
   return toko;
 }
 
-module.exports = { getAllToko, createToko, updateToko, deleteToko, editToko };
+module.exports = {
+  getAllTokos,
+  getAllToko,
+  createToko,
+  updateToko,
+  deleteToko,
+  editToko,
+};

@@ -1,10 +1,21 @@
 const {
+  getAllTokos,
   getAllToko,
   createToko,
   updateToko,
   deleteToko,
   editToko,
 } = require("../service/tokoService");
+
+async function getAllTokosController(req, res) {
+  try {
+    const tokos = await getAllTokos();
+    return res.status(200).json(tokos);
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+}
 
 async function getAllTokoController(req, res) {
   try {
@@ -108,6 +119,7 @@ async function editTokoController(req, res) {
 
 module.exports = {
   getAllTokoController,
+  getAllTokosController,
   createTokoController,
   updateTokoController,
   deleteTokoController,

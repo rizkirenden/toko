@@ -26,6 +26,7 @@ const {
 
 const {
   getAllTokoController,
+  getAllTokosController,
   createTokoController,
   updateTokoController,
   deleteTokoController,
@@ -58,6 +59,7 @@ router.get("/categories/:category_id", editCategoryController);
 
 // Toko
 router.get("/tokos", getAllTokoController);
+router.get("/tokos/all", getAllTokosController);
 router.post(
   "/tokos",
   upload.fields([{ name: "gambar", maxCount: 1 }]),

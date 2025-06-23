@@ -3,10 +3,10 @@ import { Tokocardtoko } from "../../molecules/toko/toko-card";
 import useTokoStore from "../../../store/tokoStore";
 
 const Tokotoko = () => {
-  const { tokos, loading, error, fetchTokos } = useTokoStore();
+  const { allTokos, loading, error, fetchAllTokos } = useTokoStore();
 
   useEffect(() => {
-    fetchTokos();
+    fetchAllTokos();
   }, []);
 
   if (loading)
@@ -21,7 +21,7 @@ const Tokotoko = () => {
   return (
     <div className="w-full px-4 mt-10">
       <div className="grid grid-cols-2 gap-6">
-        {tokos.map((toko) => (
+        {allTokos.map((toko) => (
           <div key={toko.id || toko._id} className="w-42 h-full">
             <Tokocardtoko
               namaToko={toko.nama_toko}
