@@ -4,18 +4,15 @@ import useTokoStore from "../../../../store/tokoStore";
 
 const Datatabelheader = () => {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("");
-
   const { fetchTokos } = useTokoStore();
 
   const handleSearch = (value) => {
     setSearch(value);
-    fetchTokos({ search: value, filter });
-  };
-
-  const handleFilter = (value) => {
-    setFilter(value);
-    fetchTokos({ search, filter: value });
+    fetchTokos({
+      page: 1,
+      limit: 5,
+      search: value,
+    });
   };
 
   return (
@@ -23,8 +20,6 @@ const Datatabelheader = () => {
       title="Data Toko"
       searchValue={search}
       onSearch={handleSearch}
-      filterValue={filter}
-      onFilterChange={handleFilter}
     />
   );
 };

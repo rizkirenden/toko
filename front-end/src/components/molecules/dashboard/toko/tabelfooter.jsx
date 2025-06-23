@@ -8,7 +8,7 @@ export const Tabelfooter = ({
   onPageChange = () => {},
 }) => {
   return (
-    <Card className="p-4 flex flex-row items-center justify-between md:flex-row md:items-center md:justify-between gap-4">
+    <Card className="p-4 flex flex-row items-center justify-between gap-4">
       <div className="text-sm text-gray-600">
         Halaman {currentPage} dari {totalPages}
       </div>

@@ -1,7 +1,11 @@
 const TokoModel = require("../model/TokoModel");
 
-async function getAllToko() {
-  return await TokoModel.getAllToko();
+async function getAllToko({ page = 1, limit = 5, search = "" } = {}) {
+  return await TokoModel.getAllToko({
+    limit,
+    offset: (page - 1) * limit,
+    search,
+  });
 }
 
 async function createToko(toko) {

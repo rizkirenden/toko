@@ -8,10 +8,16 @@ const {
 
 async function getAllTokoController(req, res) {
   try {
-    const tokoList = await getAllToko();
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.search || "";
+
+    const tokoData = await getAllToko({ page, limit, search });
+
     return res.status(200).json({
       message: "Data toko berhasil ditampilkan",
-      data: tokoList,
+      data: tokoData.data,
+      total: tokoData.total,
     });
   } catch (error) {
     console.error("Error saat mengambil data toko:", error);
