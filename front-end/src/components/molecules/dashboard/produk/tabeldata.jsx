@@ -21,28 +21,28 @@ export const Tabeldata = ({ data }) => {
         <tbody>
           {data?.map((item) => (
             <tr key={item.id} className="hover:bg-gray-100">
-              <td className="border-b p-2 text-sm">{item.id}</td>
-              <td className="border-b p-2 text-sm">{item.nama}</td>
-              <td className="border-b p-2 text-sm">{item.harga}</td>
-              <td className="border-b p-2 text-sm">{item.bahan}</td>
-              <td className="border-b p-2 text-sm">
+              <td className="border-b p-2 text-xs">{item.category_id}</td>
+              <td className="border-b p-2 text-xs">{item.name}</td>
+              <td className="border-b p-2 text-xs">{item.harga}</td>
+              <td className="border-b p-2 text-xs">{item.deskripsi_bahan}</td>
+              <td className="border-b p-2 text-xs">
                 <img
-                  src={item.gambar_product}
+                  src={`http://localhost:3000/uploads/${item.gambar_product}`}
                   alt={item.name}
                   className="w-20 h-20 object-cover rounded"
                 />
               </td>
-              <td className="border-b p-2 text-sm">
+              <td className="border-b p-2 text-xs">
                 <video
-                  src={item.video_product}
+                  src={`http://localhost:3000/uploads/${item.video_product}`}
                   alt={item.name}
                   className="w-32 h-20 rounded"
                 />
               </td>
-              <td className="border-b p-2 text-sm">{item.status}</td>
-              <td className="border-b p-2 text-sm">{item.nama_toko}</td>
-              <td className="border-b p-2 text-sm">{item.no_telp}</td>
-              <td className="border-b p-2 text-sm">{item.nama_kategori}</td>
+              <td className="border-b p-2 text-xs">{item.status}</td>
+              <td className="border-b p-2 text-xs">{item.nama_toko}</td>
+              <td className="border-b p-2 text-xs">{item.no_telp}</td>
+              <td className="border-b p-2 text-xs">{item.nama_kategori}</td>
             </tr>
           ))}
         </tbody>

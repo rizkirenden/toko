@@ -1,11 +1,13 @@
 import React from "react";
 
-import { Tabeldata } from "../components/molecules/dashboard/produk/tabeldata";
+import Datatabel from "../components/organisms/dashboard/produk/datatabel";
 import { Tabelfooter } from "../components/molecules/dashboard/produk/tabelfooter";
+import { Tableheader } from "../components/molecules/dashboard/toko/tableheader";
 const Playground = () => {
   return (
     <div className="bg-white">
-      <Tabeldata />
+      <Tableheader />
+      <Datatabel />
       <Tabelfooter />
     </div>
   );
