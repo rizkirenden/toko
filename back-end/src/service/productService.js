@@ -4,6 +4,13 @@ async function getAllProduct(filters = {}) {
   return await ProductModel.getAllProduct(filters);
 }
 
+async function getAllProductParams({ page = 1, limit = 5, search = "" } = {}) {
+  return await ProductModel.getAllProductParams({
+    limit,
+    offset: (page - 1) * limit,
+    search,
+  });
+}
 async function createProduct(product) {
   const {
     toko_id,
@@ -82,6 +89,7 @@ async function editProduct(product_id) {
 
 module.exports = {
   getAllProduct,
+  getAllProductParams,
   createProduct,
   updateProduct,
   deleteProduct,

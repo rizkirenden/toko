@@ -35,6 +35,63 @@ const ProductModel = {
     return rows;
   },
 
+  async getAllProductParams({ limit, offset, search } = {}) {
+    let dataQuery = `
+    SELECT 
+      products.*, 
+      tokos.nama_toko,
+      tokos.no_telp,
+      categorys.name AS nama_kategori
+    FROM products
+    JOIN tokos ON products.toko_id = tokos.toko_id
+    JOIN categorys ON products.category_id = categorys.category_id
+    WHERE 1=1
+  `;
+    let dataParams = [];
+
+    let countQuery = `
+    SELECT COUNT(*) AS total
+    FROM products
+    JOIN tokos ON products.toko_id = tokos.toko_id
+    JOIN categorys ON products.category_id = categorys.category_id
+    WHERE 1=1
+  `;
+    let countParams = [];
+
+    if (search) {
+      const searchCondition = `
+      AND (
+        products.name LIKE ? 
+        OR tokos.nama_toko LIKE ? 
+        OR categorys.name LIKE ?
+      )
+    `;
+      const searchParam = `%${search}%`;
+      dataQuery += searchCondition;
+      countQuery += searchCondition;
+      dataParams.push(searchParam, searchParam, searchParam);
+      countParams.push(searchParam, searchParam, searchParam);
+    }
+
+    if (limit !== undefined) {
+      dataQuery += " LIMIT ?";
+      dataParams.push(limit);
+
+      if (offset !== undefined) {
+        dataQuery += " OFFSET ?";
+        dataParams.push(offset);
+      }
+    }
+
+    const [totalRows] = await pool.query(countQuery, countParams);
+    const [rows] = await pool.query(dataQuery, dataParams);
+
+    return {
+      data: rows,
+      total: totalRows[0].total,
+    };
+  },
+
   async insertProduct(product) {
     const {
       toko_id,

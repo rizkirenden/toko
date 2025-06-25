@@ -1,5 +1,6 @@
 const {
   getAllProduct,
+  getAllProductParams,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -18,6 +19,24 @@ async function getAllProductController(req, res) {
     return res.status(200).json({
       message: "Data produk berhasil ditampilkan",
       data: products,
+    });
+  } catch (error) {
+    console.error("Error saat mengambil data produk:", error);
+    return res.status(500).json({ error: "Terjadi kesalahan pada server" });
+  }
+}
+
+async function getAllProductParamsController(req, res) {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.search || "";
+
+    const produkData = await getAllProductParams({ page, limit, search });
+    return res.status(200).json({
+      message: "Data produk berhasil di tampilkan",
+      data: produkData.data,
+      total: produkData.total,
     });
   } catch (error) {
     console.error("Error saat mengambil data produk:", error);
@@ -119,6 +138,7 @@ async function editProductController(req, res) {
 
 module.exports = {
   getAllProductController,
+  getAllProductParamsController,
   createProductController,
   updateProductController,
   deleteProductController,

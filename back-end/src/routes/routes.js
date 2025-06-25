@@ -35,6 +35,7 @@ const {
 
 const {
   getAllProductController,
+  getAllProductParamsController,
   createProductController,
   updateProductController,
   deleteProductController,
@@ -75,6 +76,7 @@ router.get("/tokos/:toko_id", editTokoController);
 
 // Product (Produk)
 router.get("/products", getAllProductController);
+router.get("/products/data", getAllProductParamsController);
 router.post(
   "/products",
   upload.fields([
