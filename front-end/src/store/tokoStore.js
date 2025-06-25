@@ -26,9 +26,9 @@ const useTokoStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await axios.get("http://localhost:3000/api/tokos/all");
-      set({ allTokos: response.data, loading: false });
+      set({ allTokos: response.data.data, loading: false });
     } catch (err) {
-      set({ error: err.message, loading: false });
+      set({ error: err.response?.data?.error || err.message, loading: false });
     }
   },
 }));

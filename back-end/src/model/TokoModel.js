@@ -2,20 +2,18 @@ const pool = require("../config/database");
 
 const TokoModel = {
   async getAllTokos() {
-    const [rows] = await pool.query("SELECT * FROM tokos");
+    const query = `SELECT * FROM tokos`;
+    const [rows] = await pool.query(query);
     return rows;
   },
 
   async getAllToko({ limit, offset, search } = {}) {
-    // Query untuk data
     let dataQuery = "SELECT * FROM tokos";
     let dataParams = [];
 
-    // Query untuk count (total)
     let countQuery = "SELECT COUNT(*) AS total FROM tokos";
     let countParams = [];
 
-    // Handle search
     if (search) {
       const searchCondition = " WHERE nama_toko LIKE ? OR nama_pemilik LIKE ?";
       dataQuery += searchCondition;
@@ -25,7 +23,6 @@ const TokoModel = {
       countParams.push(searchParam, searchParam);
     }
 
-    // Handle pagination (hanya untuk data query)
     if (limit !== undefined) {
       dataQuery += " LIMIT ?";
       dataParams.push(limit);
@@ -36,7 +33,6 @@ const TokoModel = {
       }
     }
 
-    // Eksekusi query
     const [totalRows] = await pool.query(countQuery, countParams);
     const [rows] = await pool.query(dataQuery, dataParams);
 

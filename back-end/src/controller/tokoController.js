@@ -9,11 +9,14 @@ const {
 
 async function getAllTokosController(req, res) {
   try {
-    const tokos = await getAllTokos();
-    return res.status(200).json(tokos);
+    const allTokos = await getAllTokos();
+    return res.status(200).json({
+      message: "Toko berhasil ditampilkan",
+      data: allTokos,
+    });
   } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json({ error: "Server error" });
+    console.error("Errror saat mengambil toko:", error);
+    return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }
 

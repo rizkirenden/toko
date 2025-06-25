@@ -4,10 +4,10 @@ import { Judul } from "../../molecules/landingpage/judul";
 import useTokoStore from "../../../store/tokoStore";
 
 const Toko = () => {
-  const { tokos, loading, error, fetchTokos } = useTokoStore();
+  const { allTokos, loading, error, fetchAllTokos } = useTokoStore();
 
   useEffect(() => {
-    fetchTokos();
+    fetchAllTokos();
   }, []);
 
   if (loading)
@@ -29,7 +29,7 @@ const Toko = () => {
         <div className="flex relative w-max px-5  gap-4">
           {" "}
           {/* gap di sini */}
-          {tokos.map((toko) => (
+          {allTokos.map((toko) => (
             <div key={toko.id || toko._id} className="flex-shrink-0">
               <Tokocard
                 namaToko={toko.nama_toko}
