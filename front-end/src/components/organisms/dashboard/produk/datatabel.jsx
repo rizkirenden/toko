@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { Tabeldata } from "../../../molecules/dashboard/produk/tabeldata";
 import useProdukStore from "../../../../store/produkStore";
+
 const Datatabel = ({ page, limit }) => {
-  const { produks, fetchProduks } = useProdukStore();
+  const { produksData, fetchProduksData } = useProdukStore();
 
   useEffect(() => {
-    fetchProduks({ page, limit });
-  }, [page, limit, fetchProduks]);
+    fetchProduksData({ page, limit });
+  }, [page, limit, fetchProduksData]);
+
   return (
     <div className="space-y-4">
-      <Tabeldata data={produks} />
+      <Tabeldata data={produksData} />
     </div>
   );
 };

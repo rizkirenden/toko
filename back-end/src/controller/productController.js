@@ -33,6 +33,7 @@ async function getAllProductParamsController(req, res) {
     const search = req.query.search || "";
 
     const produkData = await getAllProductParams({ page, limit, search });
+
     return res.status(200).json({
       message: "Data produk berhasil di tampilkan",
       data: produkData.data,

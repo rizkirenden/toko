@@ -4,7 +4,7 @@ import { create } from "zustand";
 const useTokoStore = create((set) => ({
   tokos: [],
   allTokos: [],
-  total: 0,
+  total: 1,
   loading: false,
   error: null,
 

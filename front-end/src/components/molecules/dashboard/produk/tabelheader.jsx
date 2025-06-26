@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "../../../atoms/card";
 import { SearchInput } from "../../../atoms/search-input";
 
-export const tabelheader = ({ title, searchValue, onSearch }) => {
+export const Tabelheader = ({ title, searchValue, onSearch }) => {
   return (
     <Card className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <h1 className="text-xl font-bold">{title}</h1>

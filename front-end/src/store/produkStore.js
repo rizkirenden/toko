@@ -1,8 +1,14 @@
 import axios from "axios";
 import { create } from "zustand";
 
-const useProdukStore = create((set) => {
-  const fetchProduks = async (filter = {}) => {
+const useProdukStore = create((set) => ({
+  produks: [],
+  produksData: [],
+  total: 1,
+  loading: false,
+  error: null,
+
+  fetchProduks: async (filter = {}) => {
     set({ loading: true, error: null });
     try {
       const params = new URLSearchParams();
@@ -22,14 +28,20 @@ const useProdukStore = create((set) => {
         loading: false,
       });
     }
-  };
+  },
 
-  return {
-    produks: [],
-    loading: false,
-    error: null,
-    fetchProduks,
-  };
-});
+  fetchProduksData: async ({ page = 1, limit = 5, search = "" } = {}) => {
+    set({ loading: true, error: null });
+    try {
+      const params = new URLSearchParams({ page, limit, search });
+      const response = await axios.get(
+        `http://localhost:3000/api/products/data?${params.toString()}`
+      );
+      set({ produksData: response.data.data, loading: false });
+    } catch (err) {
+      set({ error: err.message, loading: false });
+    }
+  },
+}));
 
 export default useProdukStore;

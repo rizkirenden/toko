@@ -1,14 +1,14 @@
 import React from "react";
 
 import Datatabel from "../components/organisms/dashboard/produk/datatabel";
-import { Tabelfooter } from "../components/molecules/dashboard/produk/tabelfooter";
-import { Tableheader } from "../components/molecules/dashboard/toko/tableheader";
+import Datatabelheader from "../components/organisms/dashboard/produk/datatabelheader";
+import Datatabelfooter from "../components/organisms/dashboard/produk/datatabelfooter";
+import ProdukLayout from "../layouts/dashboard/produkLayout";
+
 const Playground = () => {
   return (
     <div className="bg-white">
-      <Tableheader />
-      <Datatabel />
-      <Tabelfooter />
+      <ProdukLayout />
     </div>
   );
 };
