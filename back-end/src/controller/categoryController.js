@@ -106,6 +106,7 @@ async function editCategoryController(req, res) {
 
 module.exports = {
   getAllCategoryController,
+  getAllCategoryParamsController,
   createCategoryController,
   updateCategoryController,
   deleteCategoryController,

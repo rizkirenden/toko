@@ -18,6 +18,7 @@ const { loginController } = require("../controller/authController");
 
 const {
   getAllCategoryController,
+  getAllCategoryParamsController,
   createCategoryController,
   updateCategoryController,
   deleteCategoryController,
@@ -53,6 +54,7 @@ router.get("/verify-email", verifyEmailController);
 
 // Category (Kategori)
 router.get("/categories", getAllCategoryController);
+router.get("/categories/data", getAllCategoryParamsController);
 router.post("/categories", createCategoryController);
 router.put("/categories/:category_id", updateCategoryController);
 router.delete("/categories/:category_id", deleteCategoryController);
