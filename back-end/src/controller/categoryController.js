@@ -1,5 +1,6 @@
 const {
   getAllCategory,
+  getAllCategoryParams,
   createCategory,
   updateCategory,
   deleteCategory,
@@ -15,6 +16,25 @@ async function getAllCategoryController(req, res) {
     });
   } catch (error) {
     console.error("Error saat mengambil kategori:", error);
+    return res.status(500).json({ error: "Terjadi kesalahan pada server" });
+  }
+}
+
+async function getAllCategoryParamsController(req, res) {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.search || "";
+
+    const categoryData = await getAllCategoryParams({ page, limit, search });
+
+    return res.status(200).json({
+      message: "Data kategori berhasil di tampilkan",
+      data: categoryData.data,
+      total: categoryData.total,
+    });
+  } catch (error) {
+    console.error("Error saat mengambil data kategori:", error);
     return res.status(500).json({ error: "Terjadi kesalahan pada server" });
   }
 }

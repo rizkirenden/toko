@@ -7,6 +7,40 @@ const CategoryModel = {
     return rows;
   },
 
+  async getAllCategoryParams({ limit, offset, search } = {}) {
+    let dataQuery = "SELECT * FROM categorys";
+    let dataParams = [];
+
+    let countQuery = "SELECT COUNT (*) AS total FROM categorys";
+    let countParams = [];
+
+    if (search) {
+      const searchCondition = "WHERE name LIKE ? OR description LIKE ?";
+      dataQuery += searchCondition;
+      countQuery += searchCondition;
+      const searchParam = `%${search}%`;
+      dataParams.push(searchParam, searchParam);
+    }
+
+    if (limit !== undefined) {
+      dataQuery += " LIMIT ?";
+      dataParams.push(limit);
+
+      if (offset !== undefined) {
+        dataQuery += " OFFSET ?";
+        dataParams.push(offset);
+      }
+    }
+
+    const [totalRows] = await pool.query(countQuery, countParams);
+    const [rows] = await pool.query(dataQuery, dataParams);
+
+    return {
+      data: rows,
+      total: totalRows[0].total,
+    };
+  },
+
   async insertCategory(category) {
     const { name, description } = category;
 

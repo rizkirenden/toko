@@ -4,6 +4,14 @@ async function getAllCategory() {
   return await CategoryModel.getAllCategory();
 }
 
+async function getAllCategoryParams({ page = 1, limit = 5, search = "" } = {}) {
+  return await CategoryModel.getAllCategoryParams({
+    limit,
+    offset: (page - 1) * limit,
+    search,
+  });
+}
+
 async function createCategory(category) {
   const { name, description } = category;
 
@@ -43,6 +51,7 @@ async function editCategory(category_id) {
 
 module.exports = {
   getAllCategory,
+  getAllCategoryParams,
   createCategory,
   updateCategory,
   deleteCategory,
