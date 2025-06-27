@@ -3,8 +3,12 @@ const crypto = require("crypto");
 const UserModel = require("../model/UserModel");
 const sendVerificationEmail = require("./mailService");
 
-async function getAllUser() {
-  return await UserModel.getAllUser();
+async function getAllUser({ page = 1, limit = 5, search = "" } = {}) {
+  return await UserModel.getAllUser({
+    limit,
+    offset: (page - 1) * limit,
+    search,
+  });
 }
 
 async function registerUser(user) {

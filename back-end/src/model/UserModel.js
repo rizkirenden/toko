@@ -15,11 +15,45 @@ const UserModel = {
     );
     return rows[0];
   },
-  async getAllUser() {
-    const [rows] = await pool.query("SELECT * FROM users");
-    return rows;
-  },
 
+  async getAllUser({ limit, offset, search } = {}) {
+    let dataParams = [];
+    let countParams = [];
+
+    let baseQuery = `
+    FROM users
+    JOIN tokos ON users.toko_id = tokos.toko_id
+  `;
+
+    let whereClause = "";
+    if (search) {
+      whereClause = `WHERE users.email LIKE ? OR users.role LIKE ? OR tokos.nama_toko LIKE ?`;
+      const searchParam = `%${search}%`;
+      dataParams.push(searchParam, searchParam, searchParam);
+      countParams.push(searchParam, searchParam, searchParam);
+    }
+
+    let dataQuery = `SELECT users.*, tokos.nama_toko ${baseQuery} ${whereClause}`;
+    let countQuery = `SELECT COUNT(*) AS total ${baseQuery} ${whereClause}`;
+
+    if (limit !== undefined) {
+      dataQuery += ` LIMIT ?`;
+      dataParams.push(limit);
+
+      if (offset !== undefined) {
+        dataQuery += ` OFFSET ?`;
+        dataParams.push(offset);
+      }
+    }
+
+    const [totalRows] = await pool.query(countQuery, countParams);
+    const [rows] = await pool.query(dataQuery, dataParams);
+
+    return {
+      data: rows,
+      total: totalRows[0].total,
+    };
+  },
   async create({ toko_id, email, role, hashedPassword, verificationToken }) {
     const query = `
       INSERT INTO users (toko_id, email, password, role, verification_token, is_verified)

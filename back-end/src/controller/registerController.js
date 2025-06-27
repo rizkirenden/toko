@@ -8,15 +8,24 @@ const {
 
 async function getAllUserController(req, res) {
   try {
-    const users = await getAllUser();
-    const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.search || "";
+
+    const userData = await getAllUser({ page, limit, search });
+
+    const usersWithoutPasswords = userData.data.map(
+      ({ password, ...rest }) => rest
+    );
 
     res.status(200).json({
       message: "Data semua user berhasil didapatkan",
       data: usersWithoutPasswords,
+      total: userData.total,
     });
   } catch (error) {
-    res.status(500).json({ error: "Gagal mengambil data user" });   
+    console.error("Error getAllUserController:", error);
+    res.status(500).json({ error: "Gagal mengambil data user" });
   }
 }
 
