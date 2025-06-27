@@ -2,8 +2,8 @@ import React from "react";
 import { Card } from "../../../atoms/card";
 export const Tabeldata = ({ data }) => {
   return (
-    <Card>
-      <table>
+    <Card className="p-4">
+      <table className="w-full text-left border-collapse">
         <thead>
           <tr>
             <th className="border-b p-2 text-xs">ID</th>

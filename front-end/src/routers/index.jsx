@@ -6,6 +6,11 @@ import Playground from "../playground/playground";
 import Produkpage from "../pages/produkpage";
 import Tokopage from "../pages/tokopage";
 import Loginpage from "../pages/loginpage";
+import Dashpage from "../pages/dahsboard/dashpage";
+import Kategoripage from "../pages/dahsboard/kategoripage";
+import Tokopages from "../pages/dahsboard/tokopage";
+import Produkpages from "../pages/dahsboard/produkpage";
+
 const AppRoutes = () => {
   return (
     <Router>
@@ -16,6 +21,10 @@ const AppRoutes = () => {
         <Route path="/login" element={<Loginpage />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="" element={}/>
+         <Route path="" element={}/>
+          <Route path="" element={}/>
+           <Route path="" element={}/>
       </Routes>
     </Router>
   );
