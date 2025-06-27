@@ -13,7 +13,7 @@ export const Tabeldata = ({ data }) => {
         </thead>
         <tbody>
           {data?.map((item) => (
-            <tr key={item.id} className="hover: bg-gray-100">
+            <tr key={item.id} className="hover:bg-gray-100">
               <td className="border-b p-2 text-xs">{item.category_id}</td>
               <td className="border-b p-2 text-xs">{item.name}</td>
               <td className="border-b p-2 text-xs">{item.description}</td>
