@@ -18,7 +18,7 @@ export const Tabeldata = ({ data }) => {
               <td className="border-b p-2 text-xs">{item.user_id}</td>
               <td className="border-b p-2 text-xs">{item.email}</td>
               <td className="border-b p-2 text-xs">{item.role}</td>
-              <td className="border-b p-2 text-xs">{item.no_telp}</td>
+              <td className="border-b p-2 text-xs">{item.nama_toko}</td>
             </tr>
           ))}
         </tbody>

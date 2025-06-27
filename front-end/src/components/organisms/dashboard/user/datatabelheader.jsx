@@ -15,7 +15,7 @@ const Datatabelheader = () => {
     });
   };
   return (
-    <Tableheader
+    <Tabelheader
       title="Data Users"
       searchValue={search}
       onSearch={handleSearch}
