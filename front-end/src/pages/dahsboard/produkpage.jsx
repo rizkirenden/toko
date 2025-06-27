@@ -1,6 +1,6 @@
 import React from "react";
 import ProdukLayout from "../../layouts/dashboard/produkLayout";
-const produkpage = () => {
+const Produkpages = () => {
   return (
     <div>
       <ProdukLayout />
@@ -8,4 +8,4 @@ const produkpage = () => {
   );
 };
 
-export default produkpage;
+export default Produkpages;

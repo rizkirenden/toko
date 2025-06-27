@@ -21,10 +21,10 @@ const AppRoutes = () => {
         <Route path="/login" element={<Loginpage />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="" element={}/>
-         <Route path="" element={}/>
-          <Route path="" element={}/>
-           <Route path="" element={}/>
+        <Route path="/dashboard" element={<Dashpage />} />
+        <Route path="/datatoko" element={<Tokopages />} />
+        <Route path="/datacategory" element={<Kategoripage />} />
+        <Route path="/dataproduk" element={<Produkpages />} />
       </Routes>
     </Router>
   );

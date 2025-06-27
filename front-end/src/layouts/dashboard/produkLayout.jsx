@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Datatabel from "../../components/organisms/dashboard/produk/datatabel";
 import Datatabelheader from "../../components/organisms/dashboard/produk/datatabelheader";
 import Datatabelfooter from "../../components/organisms/dashboard/produk/datatabelfooter";
+
 const ProdukLayout = () => {
   const [page, setPage] = useState(1);
   const limit = 5;
