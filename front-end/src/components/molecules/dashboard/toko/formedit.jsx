@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../../../atoms/input";
 import useTokoStore from "../../../../store/tokoStore";
 export const Formedit = ({ toko, onClose }) => {
+  const [logoPreview, setLogoPreview] = useState("");
   const { updateToko } = useTokoStore();
 
   const [form, setForm] = useState({
@@ -23,6 +24,7 @@ export const Formedit = ({ toko, onClose }) => {
         alamat_pemilik: toko.alamat_pemilik,
         toko_logo: "",
       });
+      setLogoPreview(`/uploads/${toko.toko_logo}`);
     }
   }, [toko]);
 
@@ -32,7 +34,9 @@ export const Formedit = ({ toko, onClose }) => {
   };
 
   const handleFileChange = (e) => {
-    setForm((prev) => ({ ...prev, toko_logo: e.target.files[0] }));
+    const file = e.target.files[0];
+    setForm((prev) => ({ ...prev, toko_logo: file }));
+    setLogoPreview(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
@@ -102,6 +106,13 @@ export const Formedit = ({ toko, onClose }) => {
         onChange={handleFileChange}
         className="w-full"
       />
+      {logoPreview && (
+        <img
+          src={logoPreview}
+          alt="Preview Logo"
+          className="w-24 h-24 object-cover rounded border"
+        />
+      )}
       <button
         type="submit"
         className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
