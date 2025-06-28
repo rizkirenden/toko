@@ -43,8 +43,9 @@ async function createTokoController(req, res) {
   try {
     const tokoData = req.body;
 
-    if (req.files && req.files.gambar && req.files.gambar[0]) {
-      tokoData.toko_logo = req.files.gambar[0].filename;
+    // Ubah dari 'gambar' ke 'toko_logo'
+    if (req.files && req.files.toko_logo && req.files.toko_logo[0]) {
+      tokoData.toko_logo = req.files.toko_logo[0].filename;
     }
 
     const insertId = await createToko(tokoData);

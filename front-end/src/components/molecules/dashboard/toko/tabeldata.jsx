@@ -13,6 +13,7 @@ export const Tabeldata = ({ data }) => {
             <th className="border-b p-2 text-xs">No Telp</th>
             <th className="border-b p-2 text-xs">Alamat Toko</th>
             <th className="border-b p-2 text-xs">Alamat Pemilik</th>
+            <th className="border-b p-2 text-xs">Action</th>
           </tr>
         </thead>
         <tbody>

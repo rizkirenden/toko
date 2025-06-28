@@ -1,13 +1,12 @@
 import React from "react";
 
-import UserLayout from "../layouts/dashboard/userLayout";
+import TokoLayout from "../layouts/dashboard/tokoLayout";
 import { Sidebar } from "../components/molecules/dashboard/sidebar";
-
+import { Forminput } from "../components/molecules/dashboard/toko/forminput";
 const Playground = () => {
   return (
     <div className="bg-white">
-      <Sidebar />
-      <UserLayout />
+      <Forminput />
     </div>
   );
 };

@@ -31,6 +31,23 @@ const useTokoStore = create((set) => ({
       set({ error: err.response?.data?.error || err.message, loading: false });
     }
   },
+
+  addToko: async (formData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/tokos",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
 }));
 
 export default useTokoStore;

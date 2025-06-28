@@ -65,7 +65,7 @@ router.get("/tokos", getAllTokoController);
 router.get("/tokos/all", getAllTokosController);
 router.post(
   "/tokos",
-  upload.fields([{ name: "gambar", maxCount: 1 }]),
+  upload.fields([{ name: "toko_logo", maxCount: 1 }]),
   createTokoController
 );
 router.put(
