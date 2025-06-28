@@ -48,6 +48,34 @@ const useTokoStore = create((set) => ({
       throw err.response?.data?.error || err.message;
     }
   },
+
+  updateToko: async (toko_id, formData) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/tokos/${toko_id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
+
+  deleteToko: async (toko_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/api/tokos/${toko_id}`
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
 }));
 
 export default useTokoStore;

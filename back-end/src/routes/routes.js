@@ -70,7 +70,7 @@ router.post(
 );
 router.put(
   "/tokos/:toko_id",
-  upload.fields([{ name: "gambar", maxCount: 1 }]),
+  upload.fields([{ name: "toko_logo", maxCount: 1 }]),
   updateTokoController
 );
 router.delete("/tokos/:toko_id", deleteTokoController);

@@ -4,7 +4,7 @@ import useTokoStore from "../../../../store/tokoStore";
 export const Formedit = ({ toko, onClose }) => {
   const { updateToko } = useTokoStore();
 
-  const { form, setForm } = useState({
+  const [form, setForm] = useState({
     nama_toko: "",
     nama_pemilik: "",
     no_telp: "",
@@ -51,5 +51,63 @@ export const Formedit = ({ toko, onClose }) => {
     }
   };
 
-  return <div>formedit</div>;
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg"
+    >
+      <Input
+        name="nama_toko"
+        placeholder="Nama Toko"
+        value={form.nama_toko}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="nama_pemilik"
+        placeholder="Nama Pemilik"
+        value={form.nama_pemilik}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="no_telp"
+        placeholder="No Telp"
+        value={form.no_telp}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="alamat_toko"
+        placeholder="Alamat Toko"
+        value={form.alamat_toko}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="alamat_pemilik"
+        placeholder="Alamat Pemilik"
+        value={form.alamat_pemilik}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="w-full"
+      />
+      <button
+        type="submit"
+        className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
+      >
+        Update
+      </button>
+    </form>
+  );
 };

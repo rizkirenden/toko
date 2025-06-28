@@ -67,8 +67,8 @@ async function updateTokoController(req, res) {
     const { toko_id } = req.params;
     const tokoData = req.body;
 
-    if (req.files && req.files.gambar && req.files.gambar[0]) {
-      tokoData.toko_logo = req.files.gambar[0].filename;
+    if (req.files && req.files.toko_logo && req.files.toko_logo[0]) {
+      tokoData.toko_logo = req.files.toko_logo[0].filename;
     }
 
     await updateToko(toko_id, tokoData);
