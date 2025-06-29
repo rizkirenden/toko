@@ -35,14 +35,14 @@ const useCategoryStore = create((set) => ({
     }
   },
 
-  addCategory: async (formData) => {
+  addCategory: async ({ name, description }) => {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/categories",
-        formData,
+        { name, description },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
