@@ -18,7 +18,7 @@ export const Forminput = () => {
     e.preventDefault();
 
     try {
-      await addCategory(form); // cukup kirim objek biasa
+      await addCategory(form);
       alert("Kategori berhasil ditambahkan");
 
       setForm({
