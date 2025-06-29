@@ -34,6 +34,51 @@ const useCategoryStore = create((set) => ({
       set({ error: err.message, loading: false });
     }
   },
+
+  addCategory: async (formData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/categories",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
+
+  updateCategory: async (category_id, formData) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/categories/${category_id}`,
+        formData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
+
+  deleteCategory: async (category_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/api/categories/${category_id}`
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
 }));
 
 export default useCategoryStore;
