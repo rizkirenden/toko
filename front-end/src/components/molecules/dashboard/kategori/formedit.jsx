@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "../../../atoms/input";
 import useCategoryStore from "../../../../store/categoryStore";
-export const Formedit = (category, onClose) => {
+export const Formedit = ({ category, onClose }) => {
   const { updateCategory } = useCategoryStore();
 
   const [form, setForm] = useState({
@@ -24,7 +24,7 @@ export const Formedit = (category, onClose) => {
   };
 
   const handleSubmit = async (e) => {
-    e.prevenDefault();
+    e.preventDefault();
     const formData = new FormData();
     for (const key in form) {
       if (form[key]) formData.append(key, form[key]);

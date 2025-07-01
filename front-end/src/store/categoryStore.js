@@ -59,7 +59,7 @@ const useCategoryStore = create((set) => ({
         formData,
         {
           headers: {
-            "Content-type": "multipart/form-data",
+            "Content-type": "application/json",
           },
         }
       );
