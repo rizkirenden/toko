@@ -42,6 +42,51 @@ const useProdukStore = create((set) => ({
       set({ error: err.message, loading: false });
     }
   },
+
+  addProduks: async (formData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/products",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
+
+  updateProduks: async (product_id, formData) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/products/${product_id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
+
+  deleteProduks: async (product_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/api/products/${product_id}`
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
 }));
 
 export default useProdukStore;
