@@ -22,6 +22,27 @@ const useUserStore = create((set) => ({
       });
     }
   },
+
+  addUsers: async ({ email, role, nama_toko }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/register",
+        {
+          email,
+          role,
+          nama_toko,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.erorr || err.message;
+    }
+  },
 }));
 
 export default useUserStore;
