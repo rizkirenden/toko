@@ -43,6 +43,34 @@ const useUserStore = create((set) => ({
       throw err.response?.data?.erorr || err.message;
     }
   },
+
+  updateUsers: async (user_id, formData) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/users/${user_id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
+
+  deleteUsers: async (user_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/api/users/${user_id}`
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
+    }
+  },
 }));
 
 export default useUserStore;
