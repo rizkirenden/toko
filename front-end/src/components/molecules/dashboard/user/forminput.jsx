@@ -4,7 +4,7 @@ import useUserStore from "../../../../store/userStore";
 import useTokoStore from "../../../../store/tokoStore";
 
 export const Forminput = () => {
-  const { addUsers } = useUserStore(); // currentUser tidak dipakai di sini
+  const { addUsers } = useUserStore();
   const { allTokos, fetchAllTokos } = useTokoStore();
 
   const [form, setForm] = useState({

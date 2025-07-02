@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Tabeldata } from "../../../molecules/dashboard/toko/tabeldata";
 import useTokoStore from "../../../../store/tokoStore";
-import { Formedit } from "../../../molecules/dashboard/toko/formedit"; // pastikan path-nya benar
+import { Formedit } from "../../../molecules/dashboard/toko/formedit";
 
 const Datatabel = ({ page, limit }) => {
   const { tokos, fetchTokos, deleteToko } = useTokoStore();
-  const [selectedToko, setSelectedToko] = useState(null); // untuk edit
+  const [selectedToko, setSelectedToko] = useState(null);
 
   useEffect(() => {
     fetchTokos({ page, limit });
