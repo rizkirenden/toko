@@ -5,6 +5,7 @@ import useTokoStore from "../../../../store/tokoStore";
 
 export const Formedit = ({ user, onClose }) => {
   const { updateUsers } = useUserStore();
+  const { allTokos } = useTokoStore();
 
   const [form, setForm] = useState({
     email: "",
@@ -43,12 +44,64 @@ export const Formedit = ({ user, onClose }) => {
       alert("Gagal memperbarui user:" + err);
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit}
       className="space-y-4 bg-white p-6 rounded shadow max-w-lg"
     >
-      <Input />
+      <Input
+        name="email"
+        placeholder="email"
+        value={form.email}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <div>
+        <select
+          name="role"
+          value={form.role}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          required
+        >
+          <option value="">Pilih Role</option>
+          <option value="admin">Admin</option>
+          <option value="pemilik">Pemilik</option>
+        </select>
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Toko</label>
+        <select
+          name="toko_id"
+          value={form.toko_id}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          required
+        >
+          <option value="">Pilih Toko</option>
+          {allTokos.map((toko) => (
+            <option key={toko.toko_id} value={toko.toko_id}>
+              {toko.nama_toko}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button
+        type="submit"
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        Edit User
+      </button>
     </form>
   );
 };
