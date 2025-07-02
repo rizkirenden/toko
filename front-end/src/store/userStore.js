@@ -23,14 +23,15 @@ const useUserStore = create((set) => ({
     }
   },
 
-  addUsers: async ({ email, role, nama_toko }) => {
+  addUsers: async ({ email, password, role, toko_id }) => {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/register",
         {
           email,
           role,
-          nama_toko,
+          password,
+          toko_id,
         },
         {
           headers: {

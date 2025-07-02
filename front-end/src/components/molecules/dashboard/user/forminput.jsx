@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../../../atoms/input";
 import useUserStore from "../../../../store/userStore";
+import useTokoStore from "../../../../store/tokoStore";
 
 export const Forminput = () => {
-  const { addUsers } = useUserStore();
+  const { addUsers } = useUserStore(); // currentUser tidak dipakai di sini
+  const { allTokos, fetchAllTokos } = useTokoStore();
 
   const [form, setForm] = useState({
     email: "",
     password: "",
     role: "",
-    nama_toko: "",
+    toko_id: "",
   });
+
+  useEffect(() => {
+    fetchAllTokos();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +31,7 @@ export const Forminput = () => {
         email: form.email,
         password: form.password,
         role: form.role,
-        nama_toko: form.nama_toko,
+        toko_id: form.toko_id,
       });
 
       alert("User berhasil ditambahkan");
@@ -34,7 +40,7 @@ export const Forminput = () => {
         email: "",
         password: "",
         role: "",
-        nama_toko: "",
+        toko_id: "",
       });
     } catch (err) {
       alert("Gagal menambahkan user: " + err);
@@ -85,17 +91,21 @@ export const Forminput = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Nama Toko
-        </label>
-        <Input
-          name="nama_toko"
-          type="text"
-          value={form.nama_toko}
+        <label className="block text-sm font-medium text-gray-700">Toko</label>
+        <select
+          name="toko_id"
+          value={form.toko_id}
           onChange={handleChange}
-          placeholder="Masukkan nama toko"
+          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
           required
-        />
+        >
+          <option value="">Pilih Toko</option>
+          {allTokos.map((toko) => (
+            <option key={toko.toko_id} value={toko.toko_id}>
+              {toko.nama_toko}
+            </option>
+          ))}
+        </select>
       </div>
 
       <button
