@@ -41,9 +41,97 @@ export const Formedit = ({ produk, onClose }) => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setForm((prev) => ({ ...prev, gambar_produk: file }));
-    setGambarPreview(URL.createObjectURL(file));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
-  return <div>formedit</div>;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const key in form) {
+      if (form[key]) formData.append(key, form[key]);
+    }
+    try {
+      await updateProduk(produk.product_id, formData);
+      alert("Produk berhasil di perbarui");
+      onClose?.();
+    } catch (err) {
+      alert("Gagal memperbarui produk:" + err);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg"
+    >
+      <Input
+        name="name"
+        placeholder="Nama Produk"
+        value={form.name}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="harga"
+        placeholder="Harga"
+        value={form.harga}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        name="deskripsi_bahan"
+        placeholder="Deskripsi Bahan"
+        value={form.deskripsi_bahan}
+        onChange={handleChange}
+        required
+        className="w-full"
+      />
+      <Input
+        type="file"
+        name="gambar_product"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="w-full"
+      />
+      <Input
+        type="file"
+        name="video_product"
+        accept="video/*"
+        onChange={handleFileChange}
+        className="w-full"
+      />
+
+      <div>
+        <select
+          name="status"
+          value={form.status}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          required
+        >
+          <option value="">Pilih Status</option>
+          <option value="ready">Ready</option>
+          <option value="pemesanan">Pemesanan</option>
+          <option value="tidak_ready">Tidak Ready</option>
+          <option value="habis">Habis</option>
+        </select>
+      </div>
+      {gambarPreview && (
+        <img
+          src={gambarPreview}
+          alt="Preview Gambar"
+          className="w-24  h-24 object-cover rounded border"
+        />
+      )}
+      <button
+        type="submit"
+        className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
+      >
+        Update
+      </button>
+    </form>
+  );
 };
