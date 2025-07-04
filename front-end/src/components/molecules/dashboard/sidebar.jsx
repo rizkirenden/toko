@@ -61,11 +61,7 @@ export const Sidebar = () => {
               href="/datacategory"
               icon={<Icon name="kategori" />}
             />
-            <Navitem
-              label="Register"
-              href="/register"
-              icon={<Icon name="user" />}
-            />
+            <Navitem label="User" href="/user" icon={<Icon name="user" />} />
           </nav>
 
           <div className="mt-auto text-center text-xs text-white/50">
@@ -103,11 +99,7 @@ export const Sidebar = () => {
             href="/datacategory"
             icon={<Icon name="kategori" />}
           />
-          <Navitem
-            label="Register"
-            href="/register"
-            icon={<Icon name="user" />}
-          />
+          <Navitem label="User" href="/user" icon={<Icon name="user" />} />
         </div>
       </nav>
     </>

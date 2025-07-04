@@ -10,6 +10,7 @@ import Dashpage from "../pages/dahsboard/dashpage";
 import Kategoripage from "../pages/dahsboard/kategoripage";
 import Tokopages from "../pages/dahsboard/tokopage";
 import Produkpages from "../pages/dahsboard/produkpage";
+import Userpage from "../pages/dahsboard/userpage";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
         <Route path="/datatoko" element={<Tokopages />} />
         <Route path="/datacategory" element={<Kategoripage />} />
         <Route path="/dataproduk" element={<Produkpages />} />
+        <Route path="/user" element={<Userpage />} />
       </Routes>
     </Router>
   );
