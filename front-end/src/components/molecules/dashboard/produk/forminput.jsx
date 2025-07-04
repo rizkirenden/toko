@@ -97,6 +97,21 @@ export const Forminput = () => {
         onChange={FileChange}
         required
       />
+      <div>
+        <select
+          name="status"
+          value={form.status}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          required
+        >
+          <option value="">Pilih Status</option>
+          <option value="ready">Ready</option>
+          <option value="pemesanan">Pemesanan</option>
+          <option value="tidak_ready">Tidak Ready</option>
+          <option value="habis">Habis</option>
+        </select>
+      </div>
       <Input
         name="nama_kategori"
         placeholder="Nama Kategori"

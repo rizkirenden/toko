@@ -119,6 +119,12 @@ export const Formedit = ({ produk, onClose }) => {
           <option value="habis">Habis</option>
         </select>
       </div>
+      <Input
+        name="nama_kategori"
+        placeholder="Nama Kategori"
+        value={form.nama_kategori}
+        onChange={handleChange}
+      />
       {gambarPreview && (
         <img
           src={gambarPreview}
