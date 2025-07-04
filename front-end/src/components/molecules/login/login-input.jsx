@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "../../atoms/input";
 
-export const Logininput = () => {
+export const Logininput = ({ email, password, onChange }) => {
   return (
     <div className="flex flex-col gap-4 text-[#5A7243]">
       <div className="flex flex-col gap-1">
@@ -12,6 +12,8 @@ export const Logininput = () => {
           type="email"
           name="email"
           id="email"
+          value={email}
+          onChange={onChange}
           placeholder="Masukkan email anda"
           className="bg-[#FAF6E9] focus:ring-[#DDEB9D]"
         />
@@ -25,6 +27,8 @@ export const Logininput = () => {
           type="password"
           name="password"
           id="password"
+          value={password}
+          onChange={onChange}
           placeholder="Masukkan password"
           className="bg-[#FAF6E9] focus:ring-[#DDEB9D]"
         />
