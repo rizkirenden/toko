@@ -13,6 +13,21 @@ const Login = () => {
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("");
+      const data = res.data;
+
+      setAuth(data.token, {
+        email: data.email,
+        username: data.username,
+      });
+
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.response?.data?.error || "Login gagal");
+    }
+  };
   return (
     <div className="h-full flex items-center justify-center ">
       <div className="w-full max-w-md p-8 ">
@@ -20,8 +35,12 @@ const Login = () => {
           <Content />
         </div>
         <div className="space-y-4">
-          <Logininput />
-          <Loginbtn />
+          <Logininput
+            email={form.email}
+            password={form.password}
+            onChange={handleChange}
+          />
+          <Loginbtn onLogin={handleLogin} />
         </div>
       </div>
     </div>
