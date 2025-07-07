@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { Navitem } from "../../atoms/navitem";
 import { Icon } from "../../atoms/icon";
+import { Button } from "../../atoms/button";
+import { useNavigate } from "react-router-dom";
+import Authstore from "../../../store/authStore";
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { logout } = Authstore();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -62,6 +72,13 @@ export const Sidebar = () => {
               icon={<Icon name="kategori" />}
             />
             <Navitem label="User" href="/user" icon={<Icon name="user" />} />
+
+            <Button
+              onClick={handleLogout}
+              className="bg-red-500 text-white font-semibold py-2 rounded=md hover:bg-red-600 transition"
+            >
+              Logout
+            </Button>
           </nav>
 
           <div className="mt-auto text-center text-xs text-white/50">
@@ -100,6 +117,12 @@ export const Sidebar = () => {
             icon={<Icon name="kategori" />}
           />
           <Navitem label="User" href="/user" icon={<Icon name="user" />} />
+          <Button
+            onClick={handleLogout}
+            className="mt-8 bg-red-500 text-white font-semibold  py-2 rounded-md hover:bg-red-600 transition"
+          >
+            Logout
+          </Button>
         </div>
       </nav>
     </>
