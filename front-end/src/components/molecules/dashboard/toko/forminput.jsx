@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Input } from "../../../atoms/input";
 import useTokoStore from "../../../../store/tokoStore";
 
-export const Forminput = () => {
+export const Forminput = ({ onSuccess, onClose }) => {
   const { addToko } = useTokoStore();
-
   const [form, setForm] = useState({
     nama_toko: "",
     nama_pemilik: "",
@@ -43,6 +42,8 @@ export const Forminput = () => {
         alamat_pemilik: "",
         toko_logo: "",
       });
+
+      onSuccess?.(); // ✅ Tutup modal & refresh data
     } catch (err) {
       alert("Gagal menambahkan toko: " + err);
     }
@@ -51,8 +52,18 @@ export const Forminput = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded shadow max-w-lg"
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg relative"
     >
+      {/* Tombol close */}
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+      >
+        ✕
+      </button>
+
+      {/* Input fields */}
       <Input
         name="nama_toko"
         placeholder="Nama Toko"
@@ -99,6 +110,7 @@ export const Forminput = () => {
         onChange={handleFileChange}
         className="w-full"
       />
+
       <button
         type="submit"
         className="bg-[#A0C878] text-white py-2 px-4 rounded hover:bg-[#88b267]"
