@@ -1,16 +1,13 @@
 import React from "react";
 import { RiHomeSmileFill } from "react-icons/ri";
-import { MdRestaurantMenu } from "react-icons/md";
 import { GiShop } from "react-icons/gi";
-import { IoLogIn } from "react-icons/io5";
 import { FaSearchengin } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdCategory, MdRestaurantMenu } from "react-icons/md";
 import { HiBuildingStorefront } from "react-icons/hi2";
 import { LuBaggageClaim } from "react-icons/lu";
-import { VscFolderLibrary } from "react-icons/vsc";
 import { FaUsers } from "react-icons/fa";
-import { IoLogOut } from "react-icons/io5";
-import { IoAppsOutline } from "react-icons/io5";
+import { IoLogOut, IoLogIn, IoAppsOutline } from "react-icons/io5";
+
 export const Icon = ({ name, size = 20, color = "white" }) => {
   const icons = {
     home: <RiHomeSmileFill size={size} color={color} />,
@@ -21,7 +18,7 @@ export const Icon = ({ name, size = 20, color = "white" }) => {
     dashboard: <MdDashboard size={size} color={color} />,
     toko: <HiBuildingStorefront size={size} color={color} />,
     produk: <LuBaggageClaim size={size} color={color} />,
-    kategori: <VscFolderLibrary size={size} color={color} />,
+    kategori: <MdCategory size={size} color={color} />,
     user: <FaUsers size={size} color={color} />,
     logout: <IoLogOut size={size} color={color} />,
     sidebar: <IoAppsOutline size={size} color={color} />,

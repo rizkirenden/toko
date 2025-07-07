@@ -4,7 +4,7 @@ import { Icon } from "../../atoms/icon";
 import { Button } from "../../atoms/button";
 import { useNavigate } from "react-router-dom";
 import Authstore from "../../../store/authStore";
-
+import { IoLogOut } from "react-icons/io5";
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -75,8 +75,9 @@ export const Sidebar = () => {
 
             <Button
               onClick={handleLogout}
-              className="bg-red-500 text-white font-semibold py-2 rounded=md hover:bg-red-600 transition"
+              className="bg-red-500 text-white justify-center font-semibold py-2 px-4 rounded-md hover:bg-red-600 transition flex items-center gap-2"
             >
+              <IoLogOut className="text-lg" />
               Logout
             </Button>
           </nav>
@@ -117,12 +118,15 @@ export const Sidebar = () => {
             icon={<Icon name="kategori" />}
           />
           <Navitem label="User" href="/user" icon={<Icon name="user" />} />
-          <Button
-            onClick={handleLogout}
-            className="mt-8 bg-red-500 text-white font-semibold  py-2 rounded-md hover:bg-red-600 transition"
-          >
-            Logout
-          </Button>
+          <div className="ml-auto">
+            <Button
+              onClick={handleLogout}
+              className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-red-600 transition flex items-center gap-2"
+            >
+              <IoLogOut className="text-lg" />
+              Logout
+            </Button>
+          </div>
         </div>
       </nav>
     </>
