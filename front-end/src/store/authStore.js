@@ -1,11 +1,10 @@
-import React from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const Authstore = create(
   persist(
     (set) => ({
-      toke: null,
+      token: null,
       user: null,
       isAuthenticated: false,
 

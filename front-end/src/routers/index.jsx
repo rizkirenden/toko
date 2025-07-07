@@ -12,6 +12,7 @@ import Tokopages from "../pages/dahsboard/tokopage";
 import Produkpages from "../pages/dahsboard/produkpage";
 import Userpage from "../pages/dahsboard/userpage";
 
+import Privateroute from "../middleware/privateroute";
 const AppRoutes = () => {
   return (
     <Router>
@@ -22,11 +23,47 @@ const AppRoutes = () => {
         <Route path="/login" element={<Loginpage />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/dashboard" element={<Dashpage />} />
-        <Route path="/datatoko" element={<Tokopages />} />
-        <Route path="/datacategory" element={<Kategoripage />} />
-        <Route path="/dataproduk" element={<Produkpages />} />
-        <Route path="/user" element={<Userpage />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <Privateroute>
+              <Dashpage />
+            </Privateroute>
+          }
+        />
+        <Route
+          path="/datatoko"
+          element={
+            <Privateroute>
+              <Tokopages />
+            </Privateroute>
+          }
+        />
+        <Route
+          path="/datacategory"
+          element={
+            <Privateroute>
+              <Kategoripage />
+            </Privateroute>
+          }
+        />
+        <Route
+          path="/dataproduk"
+          element={
+            <Privateroute>
+              <Produkpages />
+            </Privateroute>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <Privateroute>
+              <Userpage />
+            </Privateroute>
+          }
+        />
       </Routes>
     </Router>
   );
