@@ -13,7 +13,6 @@ const TokoLayout = () => {
 
   return (
     <div className="space">
-      <Datatabelheader />
       <Datatabel page={page} limit={limit} />
       <Datatabelfooter currentPage={page} onPageChange={handlePageChange} />
     </div>
