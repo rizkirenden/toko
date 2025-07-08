@@ -32,7 +32,6 @@ const Datatabel = ({ page, limit }) => {
   return (
     <div className="space-y-4">
       <Datatabelheader onRefresh={() => fetchTokos({ page, limit })} />{" "}
-      {/* ✅ Tambah header */}
       <Tabeldata data={tokos} onEdit={handleEdit} onDelete={handleDelete} />
       {selectedToko && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
