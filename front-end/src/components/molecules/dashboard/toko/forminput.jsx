@@ -43,7 +43,7 @@ export const Forminput = ({ onSuccess, onClose }) => {
         toko_logo: "",
       });
 
-      onSuccess?.(); // ✅ Tutup modal & refresh data
+      onSuccess?.();
     } catch (err) {
       alert("Gagal menambahkan toko: " + err);
     }
@@ -54,7 +54,6 @@ export const Forminput = ({ onSuccess, onClose }) => {
       onSubmit={handleSubmit}
       className="space-y-4 bg-white p-6 rounded shadow max-w-lg relative"
     >
-      {/* Tombol close */}
       <button
         type="button"
         onClick={onClose}
@@ -63,7 +62,6 @@ export const Forminput = ({ onSuccess, onClose }) => {
         ✕
       </button>
 
-      {/* Input fields */}
       <Input
         name="nama_toko"
         placeholder="Nama Toko"

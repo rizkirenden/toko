@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Input } from "../../../atoms/input";
 import useCategoryStore from "../../../../store/categoryStore";
-export const Forminput = () => {
+
+export const Forminput = (onSuccess, onClose) => {
   const { addCategory } = useCategoryStore();
 
   const [form, setForm] = useState({
@@ -25,6 +26,7 @@ export const Forminput = () => {
         name: "",
         description: "",
       });
+      onSuccess?.();
     } catch (err) {
       alert("Gagal menambahakan kategori: " + err);
     }
@@ -35,6 +37,13 @@ export const Forminput = () => {
       onSubmit={handleSubmit}
       className="space-y-4 bg-white p-6 rounded shadow max-w-lg "
     >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-2 right-2 text-gray-400 hover:text-gray-400"
+      >
+        ✕
+      </button>
       <Input
         name="name"
         placeholder="Nama Kategori"
