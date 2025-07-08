@@ -27,7 +27,7 @@ const Datatabelheader = ({ onRefresh }) => {
             onClick={() => setShowFormInput(true)}
             className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
           >
-            + Tambah Toko
+            + Tambah Kategori
           </button>
         }
       />

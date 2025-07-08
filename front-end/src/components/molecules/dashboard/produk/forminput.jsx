@@ -59,7 +59,7 @@ export const Forminput = ({ onSuccess, onClose }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded shadow max-w-lg"
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg relative"
     >
       <button
         type="button"
@@ -126,6 +126,12 @@ export const Forminput = ({ onSuccess, onClose }) => {
         value={form.nama_kategori}
         onChange={handleChange}
       />
+      <button
+        type="submit"
+        className="bg-[#A0C878] text-white py-2 px-4 rounded hover:bg-[#88b267]"
+      >
+        Simpan
+      </button>
     </form>
   );
 };

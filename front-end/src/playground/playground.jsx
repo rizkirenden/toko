@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Forminput } from "../components/molecules/dashboard/user/forminput";
+import { Forminput } from "../components/molecules/dashboard/produk/forminput";
 const Playground = () => {
   return (
     <div className="bg-white">
