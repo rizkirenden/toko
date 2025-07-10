@@ -3,7 +3,7 @@ import { Input } from "../../../atoms/input";
 import useProdukStore from "../../../../store/produkStore";
 import useCategoryStore from "../../../../store/categoryStore";
 export const Forminput = ({ onSuccess, onClose }) => {
-  const { addProduct } = useProdukStore();
+  const { addProduks } = useProdukStore();
   const { categories, fetchCategories } = useCategoryStore();
   const [form, setForm] = useState({
     name: "",
@@ -38,7 +38,7 @@ export const Forminput = ({ onSuccess, onClose }) => {
     }
 
     try {
-      await addProduct(formData);
+      await addProduks(formData);
       alert("Produk berhasil ditambah");
 
       setForm({

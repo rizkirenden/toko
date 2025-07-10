@@ -82,8 +82,8 @@ router.get("/products/data", getAllProductParamsController);
 router.post(
   "/products",
   upload.fields([
-    { name: "gambar", maxCount: 1 },
-    { name: "video", maxCount: 1 },
+    { name: "gambar_product", maxCount: 1 },
+    { name: "video_product", maxCount: 1 },
   ]),
   createProductController
 );
@@ -91,8 +91,8 @@ router.post(
 router.put(
   "/products/:product_id",
   upload.fields([
-    { name: "gambar", maxCount: 1 },
-    { name: "video", maxCount: 1 },
+    { name: "gambar_product", maxCount: 1 },
+    { name: "video_product", maxCount: 1 },
   ]),
   updateProductController
 );
