@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "../../../atoms/input";
 import useCategoryStore from "../../../../store/categoryStore";
 
-export const Forminput = (onSuccess, onClose) => {
+export const Forminput = ({ onSuccess, onClose }) => {
   const { addCategory } = useCategoryStore();
 
   const [form, setForm] = useState({
@@ -35,7 +35,7 @@ export const Forminput = (onSuccess, onClose) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded shadow max-w-lg "
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg relative "
     >
       <button
         type="button"
