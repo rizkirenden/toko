@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card } from "../../../atoms/card";
 
-export const Tabeldata = ({ data }) => {
+export const Tabeldata = ({ data, onEdit, onDelete }) => {
   const [previewImage, setPreviewImage] = useState(null);
 
   return (
@@ -52,6 +52,22 @@ export const Tabeldata = ({ data }) => {
                 <td className="border-b p-2 text-xs">{item.nama_toko}</td>
                 <td className="border-b p-2 text-xs">{item.no_telp}</td>
                 <td className="border-b p-2 text-xs">{item.nama_kategori}</td>
+                <td className="border-b p-2 text-xs">
+                  <td className="flex gap-2">
+                    <button
+                      onClick={() => onEdit(item)}
+                      className="text-blue-500 hover:underline text-xs"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => onDelete(item.product_id)}
+                      className="text-red-500 hover:underline text-xs"
+                    >
+                      Hapus
+                    </button>
+                  </td>
+                </td>
               </tr>
             ))}
           </tbody>
