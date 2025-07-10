@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "../../../atoms/input";
 import useProdukStore from "../../../../store/produkStore";
-
+import useCategoryStore from "../../../../store/categoryStore";
 export const Forminput = ({ onSuccess, onClose }) => {
   const { addProduct } = useProdukStore();
-
+  const { categories, fetchCategories } = useCategoryStore();
   const [form, setForm] = useState({
     name: "",
     harga: "",
@@ -14,9 +14,11 @@ export const Forminput = ({ onSuccess, onClose }) => {
     status: "",
     nama_toko: "",
     no_telp: "",
-    nama_kategori: "",
+    category_id: "",
   });
-
+  useEffect(() => {
+    fetchCategories();
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -48,7 +50,7 @@ export const Forminput = ({ onSuccess, onClose }) => {
         status: "",
         nama_toko: "",
         no_telp: "",
-        nama_kategori: "",
+        category_id: "",
       });
       onSuccess?.();
     } catch (err) {
@@ -88,6 +90,7 @@ export const Forminput = ({ onSuccess, onClose }) => {
         name="deskripsi_bahan"
         placeholder="Deskripsi Bahan"
         value={form.deskripsi_bahan}
+        onChange={handleChange}
         required
         className="w-full"
       />
@@ -120,12 +123,26 @@ export const Forminput = ({ onSuccess, onClose }) => {
           <option value="habis">Habis</option>
         </select>
       </div>
-      <Input
-        name="nama_kategori"
-        placeholder="Nama Kategori"
-        value={form.nama_kategori}
-        onChange={handleChange}
-      />
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Kategori
+        </label>
+        <select
+          name="category_id"
+          value={form.category_id}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          required
+        >
+          <option value="">Pilih Kategori</option>
+          {categories.map((category) => (
+            <option key={category.category_id} value={category.category_id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <button
         type="submit"
         className="bg-[#A0C878] text-white py-2 px-4 rounded hover:bg-[#88b267]"
