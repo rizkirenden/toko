@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Datatabelheader from "../../components/organisms/dashboard/toko/datatabelheader";
+import { Sidebar } from "../../components/molecules/dashboard/sidebar";
+
 import Datatabel from "../../components/organisms/dashboard/toko/datatabel";
 import Datatabelfooter from "../../components/organisms/dashboard/toko/datatabelfooter";
 
@@ -12,9 +13,12 @@ const TokoLayout = () => {
   };
 
   return (
-    <div className="space">
-      <Datatabel page={page} limit={limit} />
-      <Datatabelfooter currentPage={page} onPageChange={handlePageChange} />
+    <div className="flex min-h-screen">
+      <Sidebar />
+      <main className="flex-1 md:ml-64 px-4 py-6">
+        <Datatabel page={page} limit={limit} />
+        <Datatabelfooter currentPage={page} onPageChange={handlePageChange} />
+      </main>
     </div>
   );
 };
