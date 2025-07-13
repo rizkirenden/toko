@@ -22,9 +22,9 @@ export const Formedit = ({ toko, onClose }) => {
         no_telp: toko.no_telp,
         alamat_toko: toko.alamat_toko,
         alamat_pemilik: toko.alamat_pemilik,
-        toko_logo: "",
+        toko_logo: toko.toko_logo,
       });
-      setLogoPreview(`/uploads/${toko.toko_logo}`);
+      setLogoPreview(`http://localhost:3000/uploads/${toko.toko_logo}`);
     }
   }, [toko]);
 
