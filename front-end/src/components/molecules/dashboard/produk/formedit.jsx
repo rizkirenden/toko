@@ -2,24 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../../../atoms/input";
 import useProdukStore from "../../../../store/produkStore";
 import useCategoryStore from "../../../../store/categoryStore";
+import Authstore from "../../../../store/authStore";
 
-export const Formedit = ({ produk, onClose }) => {
-  const [gambarPreview, setGambarPreview] = useState("");
-  const [videoPreview, setVideoPreview] = useState("");
+export const Formedit = ({ produk, onClose, onSuccess }) => {
   const { updateProduks } = useProdukStore();
   const { categories, fetchCategories } = useCategoryStore();
+  const { user } = Authstore();
+  const toko_id = user?.toko_id;
 
   const [form, setForm] = useState({
     name: "",
     harga: "",
     deskripsi_bahan: "",
-    gambar_product: "",
-    video_product: "",
+    gambar_product: null,
+    video_product: null,
     status: "",
-    nama_toko: "",
-    no_telp: "",
     category_id: "",
+    toko_id: toko_id || "",
   });
+
+  const [gambarPreview, setGambarPreview] = useState("");
+  const [videoPreview, setVideoPreview] = useState("");
 
   useEffect(() => {
     fetchCategories();
@@ -34,16 +37,16 @@ export const Formedit = ({ produk, onClose }) => {
         gambar_product: produk.gambar_product,
         video_product: produk.video_product,
         status: produk.status,
-        nama_toko: produk.nama_toko,
-        no_telp: produk.no_telp,
         category_id: produk.category_id,
+        toko_id: toko_id || produk.toko_id || "",
       });
+
       setGambarPreview(
         `http://localhost:3000/uploads/${produk.gambar_product}`
       );
       setVideoPreview(`http://localhost:3000/uploads/${produk.video_product}`);
     }
-  }, [produk]);
+  }, [produk, toko_id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,20 +55,28 @@ export const Formedit = ({ produk, onClose }) => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    if (files.length > 0) {
-      setForm((prev) => ({ ...prev, [name]: files[0] }));
+    const file = files[0];
+    if (file) {
+      setForm((prev) => ({ ...prev, [name]: file }));
+      const previewUrl = URL.createObjectURL(file);
+      if (name === "gambar_product") setGambarPreview(previewUrl);
+      if (name === "video_product") setVideoPreview(previewUrl);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
+
     for (const key in form) {
       if (form[key]) formData.append(key, form[key]);
     }
+
     try {
       await updateProduks(produk.product_id, formData);
       alert("Produk berhasil diperbarui");
+      onSuccess?.();
       onClose?.();
     } catch (err) {
       alert("Gagal memperbarui produk: " + err);
@@ -80,7 +91,7 @@ export const Formedit = ({ produk, onClose }) => {
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-2 right-2 text-gray-400 hover:text-gray-400"
+        className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
       >
         ✕
       </button>
@@ -91,7 +102,6 @@ export const Formedit = ({ produk, onClose }) => {
         value={form.name}
         onChange={handleChange}
         required
-        className="w-full"
       />
       <Input
         name="harga"
@@ -99,7 +109,6 @@ export const Formedit = ({ produk, onClose }) => {
         value={form.harga}
         onChange={handleChange}
         required
-        className="w-full"
       />
       <Input
         name="deskripsi_bahan"
@@ -107,28 +116,13 @@ export const Formedit = ({ produk, onClose }) => {
         value={form.deskripsi_bahan}
         onChange={handleChange}
         required
-        className="w-full"
       />
-      <Input
-        name="nama_toko"
-        placeholder="Nama Toko"
-        value={form.nama_toko}
-        onChange={handleChange}
-        className="w-full"
-      />
-      <Input
-        name="no_telp"
-        placeholder="No Telp"
-        value={form.no_telp}
-        onChange={handleChange}
-        className="w-full"
-      />
+
       <Input
         type="file"
         name="gambar_product"
         accept="image/*"
         onChange={handleFileChange}
-        className="w-full"
       />
       {gambarPreview && (
         <img
@@ -137,57 +131,53 @@ export const Formedit = ({ produk, onClose }) => {
           className="w-24 h-24 object-cover rounded border"
         />
       )}
+
       <Input
         type="file"
         name="video_product"
         accept="video/*"
         onChange={handleFileChange}
-        className="w-full"
       />
       {videoPreview && (
         <video
           src={videoPreview}
           controls
-          className="w-48 h-32 rounded border object-cover"
+          className="w-48 h-32 object-cover rounded border"
         />
       )}
-      <div>
-        <select
-          name="status"
-          value={form.status}
-          onChange={handleChange}
-          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
-          required
-        >
-          <option value="">Pilih Status</option>
-          <option value="ready">Ready</option>
-          <option value="pemesanan">Pemesanan</option>
-          <option value="tidak_ready">Tidak Ready</option>
-          <option value="habis">Habis</option>
-        </select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Kategori
-        </label>
-        <select
-          name="category_id"
-          value={form.category_id}
-          onChange={handleChange}
-          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
-          required
-        >
-          <option value="">Pilih Kategori</option>
-          {categories.map((category) => (
-            <option key={category.category_id} value={category.category_id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
+
+      <select
+        name="status"
+        value={form.status}
+        onChange={handleChange}
+        className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+        required
+      >
+        <option value="">Pilih Status</option>
+        <option value="ready">Ready</option>
+        <option value="pemesanan">Pemesanan</option>
+        <option value="tidak_ready">Tidak Ready</option>
+        <option value="habis">Habis</option>
+      </select>
+
+      <select
+        name="category_id"
+        value={form.category_id}
+        onChange={handleChange}
+        className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+        required
+      >
+        <option value="">Pilih Kategori</option>
+        {categories.map((category) => (
+          <option key={category.category_id} value={category.category_id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+
       <button
         type="submit"
-        className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
+        className="bg-[#F7C04A] text-white py-2 px-4 rounded hover:bg-[#e2b03c]"
       >
         Update
       </button>

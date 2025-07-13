@@ -7,8 +7,8 @@ import Authstore from "../../../../store/authStore"; // Cukup ini saja
 export const Forminput = ({ onSuccess, onClose }) => {
   const { addProduks } = useProdukStore();
   const { categories, fetchCategories } = useCategoryStore();
-  const { user } = Authstore(); // Ambil user login
-  const toko_id = user?.toko_id; // Ambil toko_id langsung dari user
+  const { user } = Authstore();
+  const toko_id = user?.toko_id;
 
   const [form, setForm] = useState({
     name: "",
