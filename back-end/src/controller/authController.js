@@ -21,6 +21,7 @@ async function loginController(req, res) {
       user_id: user.user_id,
       email: user.email,
       username: user.username,
+      toko_id: user.toko_id, // Tambahkan ini
     };
 
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1D" });

@@ -50,11 +50,11 @@ async function createProductController(req, res) {
     const productData = req.body;
 
     if (req.files) {
-      if (req.files.gambar) {
-        productData.gambar_product = req.files.gambar[0].filename;
+      if (req.files.gambar_product) {
+        productData.gambar_product = req.files.gambar_product[0].filename;
       }
-      if (req.files.video) {
-        productData.video_product = req.files.video[0].filename;
+      if (req.files.video_product) {
+        productData.video_product = req.files.video_product[0].filename;
       }
     }
 

@@ -5,7 +5,8 @@ import useCategoryStore from "../../../../store/categoryStore";
 
 export const Formedit = ({ produk, onClose }) => {
   const [gambarPreview, setGambarPreview] = useState("");
-  const { updateProduk } = useProdukStore();
+  const [videoPreview, setVideoPreview] = useState("");
+  const { updateProduks } = useProdukStore();
   const { categories, fetchCategories } = useCategoryStore();
 
   const [form, setForm] = useState({
@@ -27,17 +28,20 @@ export const Formedit = ({ produk, onClose }) => {
   useEffect(() => {
     if (produk) {
       setForm({
-        name: produk.name || "",
-        harga: produk.harga || "",
-        deskripsi_bahan: produk.deskripsi_bahan || "",
-        gambar_product: "",
-        video_product: "",
-        status: produk.status || "",
-        nama_toko: produk.nama_toko || "",
-        no_telp: produk.no_telp || "",
-        category_id: produk.category_id || "",
+        name: produk.name,
+        harga: produk.harga,
+        deskripsi_bahan: produk.deskripsi_bahan,
+        gambar_product: produk.gambar_product,
+        video_product: produk.video_product,
+        status: produk.status,
+        nama_toko: produk.nama_toko,
+        no_telp: produk.no_telp,
+        category_id: produk.category_id,
       });
-      setGambarPreview(`/uploads/${produk.gambar_produk}`);
+      setGambarPreview(
+        `http://localhost:3000/uploads/${produk.gambar_product}`
+      );
+      setVideoPreview(`http://localhost:3000/uploads/${produk.video_product}`);
     }
   }, [produk]);
 
@@ -60,7 +64,7 @@ export const Formedit = ({ produk, onClose }) => {
       if (form[key]) formData.append(key, form[key]);
     }
     try {
-      await updateProduk(produk.product_id, formData);
+      await updateProduks(produk.product_id, formData);
       alert("Produk berhasil diperbarui");
       onClose?.();
     } catch (err) {
@@ -140,6 +144,13 @@ export const Formedit = ({ produk, onClose }) => {
         onChange={handleFileChange}
         className="w-full"
       />
+      {videoPreview && (
+        <video
+          src={videoPreview}
+          controls
+          className="w-48 h-32 rounded border object-cover"
+        />
+      )}
       <div>
         <select
           name="status"

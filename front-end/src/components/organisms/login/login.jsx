@@ -5,6 +5,7 @@ import { Logininput } from "../../molecules/login/login-input";
 import Authstore from "../../../store/authStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"; // ✅ benar
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -16,11 +17,15 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const res = await axios.post("http://localhost:3000/api/login", form);
-      const data = res.data;
+      const { token } = res.data;
 
-      setAuth(data.token, {
-        email: data.email,
-        username: data.username,
+      const decoded = jwtDecode(token);
+
+      setAuth(token, {
+        user_id: decoded.user_id,
+        email: decoded.email,
+        username: decoded.username,
+        toko_id: decoded.toko_id,
       });
 
       navigate("/dashboard");

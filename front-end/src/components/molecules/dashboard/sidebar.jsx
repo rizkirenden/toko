@@ -89,7 +89,7 @@ export const Sidebar = () => {
       </div>
 
       {/* Sidebar tetap (Desktop) */}
-      <div className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:left-0 md:w-64 md:bg-white/10 md:backdrop-blur-xl md:border-r md:border-white/20 md:shadow-xl md:z-40">
+      <div className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:left-0 md:w-64 md:bg-[#A0C878] md:backdrop-blur-xl md:border-r md:border-white/20 md:shadow-xl md:z-40">
         <div className="p-6 flex flex-col h-full">
           <div className="flex justify-center mb-8">
             <img
