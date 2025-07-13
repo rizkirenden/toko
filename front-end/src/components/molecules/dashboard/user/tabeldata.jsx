@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "../../../atoms/card";
-export const Tabeldata = ({ data }) => {
+export const Tabeldata = ({ data, onEdit, onDelete }) => {
   return (
     <Card className="p-4">
       <table className="w-full text-left border-collapse">
@@ -19,6 +19,22 @@ export const Tabeldata = ({ data }) => {
               <td className="border-b p-2 text-xs">{item.email}</td>
               <td className="border-b p-2 text-xs">{item.role}</td>
               <td className="border-b p-2 text-xs">{item.nama_toko}</td>
+              <td className="border-b p-2 text-xs">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => onEdit(item)}
+                    className="text-blue-500 hover:underline text-xs"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => onDelete(item.toko_id)}
+                    className="text-red-500 hover:underline text-xs"
+                  >
+                    Hapus
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
