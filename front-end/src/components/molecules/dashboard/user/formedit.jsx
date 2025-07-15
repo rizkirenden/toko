@@ -48,8 +48,15 @@ export const Formedit = ({ user, onClose }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded shadow max-w-lg"
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg relative"
     >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+      >
+        ✕
+      </button>
       <Input
         name="email"
         placeholder="email"

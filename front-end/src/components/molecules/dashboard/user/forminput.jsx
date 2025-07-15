@@ -3,7 +3,7 @@ import { Input } from "../../../atoms/input";
 import useUserStore from "../../../../store/userStore";
 import useTokoStore from "../../../../store/tokoStore";
 
-export const Forminput = () => {
+export const Forminput = ({ onSuccess, onClose }) => {
   const { addUsers } = useUserStore();
   const { allTokos, fetchAllTokos } = useTokoStore();
 
@@ -42,13 +42,24 @@ export const Forminput = () => {
         role: "",
         toko_id: "",
       });
+      onSuccess?.();
     } catch (err) {
       alert("Gagal menambahkan user: " + err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 bg-white p-6 rounded shadow max-w-lg relative"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+      >
+        ✕
+      </button>
       <div>
         <label className="block text-sm font-medium text-gray-700">Email</label>
         <Input
