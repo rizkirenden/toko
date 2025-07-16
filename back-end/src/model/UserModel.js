@@ -33,7 +33,6 @@ const UserModel = {
       countParams.push(searchParam, searchParam, searchParam);
     }
 
-    // Use COALESCE to handle NULL nama_toko
     let dataQuery = `SELECT users.*, COALESCE(tokos.nama_toko, 'N/A') AS nama_toko ${baseQuery} ${whereClause}`;
     let countQuery = `SELECT COUNT(*) AS total ${baseQuery} ${whereClause}`;
 
