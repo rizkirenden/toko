@@ -11,15 +11,22 @@ async function getAllUser({ page = 1, limit = 5, search = "" } = {}) {
   });
 }
 
+// In registerService.js
 async function registerUser(user) {
-  const { toko_id, email, password, role } = user;
+  const { email, password, role } = user;
+  let { toko_id } = user;
 
-  if (!toko_id || !email || !password || !role) {
+  if (!email || !password || !role) {
     throw new Error("Data tidak lengkap");
   }
 
   if (!["admin", "pemilik"].includes(role)) {
     throw new Error("Role tidak valid");
+  }
+
+  // Make toko_id required only for pemilik (owner) role
+  if (role === "pemilik" && !toko_id) {
+    throw new Error("Toko ID diperlukan untuk role pemilik");
   }
 
   const existingUser = await UserModel.findByEmail(email);
@@ -31,7 +38,7 @@ async function registerUser(user) {
   const verificationToken = crypto.randomBytes(32).toString("hex");
 
   const userId = await UserModel.create({
-    toko_id,
+    toko_id: role === "admin" ? null : toko_id, // Set toko_id to null for admin
     email,
     hashedPassword,
     role,
@@ -42,16 +49,23 @@ async function registerUser(user) {
 
   return userId;
 }
-async function updateUser(user_id, data) {
-  const { toko_id, email, password, role } = data;
 
-  if (!toko_id || !email || !password || !role) {
+async function updateUser(user_id, data) {
+  const { email, password, role } = data;
+  let { toko_id } = data;
+
+  if (!email || !password || !role) {
     throw new Error("Data tidak lengkap");
+  }
+
+  // Make toko_id required only for pemilik (owner) role
+  if (role === "pemilik" && !toko_id) {
+    throw new Error("Toko ID diperlukan untuk role pemilik");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const success = await UserModel.update(user_id, {
-    toko_id,
+    toko_id: role === "admin" ? null : toko_id, // Set toko_id to null for admin
     email,
     role,
     password: hashedPassword,

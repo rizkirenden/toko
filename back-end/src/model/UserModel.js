@@ -22,7 +22,7 @@ const UserModel = {
 
     let baseQuery = `
     FROM users
-    JOIN tokos ON users.toko_id = tokos.toko_id
+    LEFT JOIN tokos ON users.toko_id = tokos.toko_id
   `;
 
     let whereClause = "";
@@ -33,7 +33,8 @@ const UserModel = {
       countParams.push(searchParam, searchParam, searchParam);
     }
 
-    let dataQuery = `SELECT users.*, tokos.nama_toko ${baseQuery} ${whereClause}`;
+    // Use COALESCE to handle NULL nama_toko
+    let dataQuery = `SELECT users.*, COALESCE(tokos.nama_toko, 'N/A') AS nama_toko ${baseQuery} ${whereClause}`;
     let countQuery = `SELECT COUNT(*) AS total ${baseQuery} ${whereClause}`;
 
     if (limit !== undefined) {
@@ -56,10 +57,17 @@ const UserModel = {
   },
   async create({ toko_id, email, role, hashedPassword, verificationToken }) {
     const query = `
-      INSERT INTO users (toko_id, email, password, role, verification_token, is_verified)
-      VALUES (?, ?, ?, ?, ?, 0)
-    `;
-    const values = [toko_id, email, hashedPassword, role, verificationToken];
+    INSERT INTO users (toko_id, email, password, role, verification_token, is_verified)
+    VALUES (?, ?, ?, ?, ?, 0)
+  `;
+    // Allow toko_id to be null for admin users
+    const values = [
+      toko_id || null,
+      email,
+      hashedPassword,
+      role,
+      verificationToken,
+    ];
     const [result] = await pool.query(query, values);
     return result.insertId;
   },

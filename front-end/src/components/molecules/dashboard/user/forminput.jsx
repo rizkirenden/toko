@@ -26,12 +26,18 @@ export const Forminput = ({ onSuccess, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate form based on role
+    if (form.role === "pemilik" && !form.toko_id) {
+      alert("Toko harus dipilih untuk role Pemilik");
+      return;
+    }
+
     try {
       await addUsers({
         email: form.email,
         password: form.password,
         role: form.role,
-        toko_id: form.toko_id,
+        toko_id: form.role === "admin" ? null : form.toko_id, // Send null for admin
       });
 
       alert("User berhasil ditambahkan");
@@ -101,23 +107,27 @@ export const Forminput = ({ onSuccess, onClose }) => {
         </select>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Toko</label>
-        <select
-          name="toko_id"
-          value={form.toko_id}
-          onChange={handleChange}
-          className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
-          required
-        >
-          <option value="">Pilih Toko</option>
-          {allTokos.map((toko) => (
-            <option key={toko.toko_id} value={toko.toko_id}>
-              {toko.nama_toko}
-            </option>
-          ))}
-        </select>
-      </div>
+      {form.role === "pemilik" && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Toko
+          </label>
+          <select
+            name="toko_id"
+            value={form.toko_id}
+            onChange={handleChange}
+            className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+            required={form.role === "pemilik"}
+          >
+            <option value="">Pilih Toko</option>
+            {allTokos.map((toko) => (
+              <option key={toko.toko_id} value={toko.toko_id}>
+                {toko.nama_toko}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <button
         type="submit"
