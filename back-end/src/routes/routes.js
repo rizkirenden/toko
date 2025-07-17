@@ -77,8 +77,18 @@ router.delete("/tokos/:toko_id", deleteTokoController);
 router.get("/tokos/:toko_id", editTokoController);
 
 // Product (Produk)
-router.get("/products", getAllProductController);
-router.get("/products/data", getAllProductParamsController);
+getAllProductParamsController
+} = require("../controllers/productController");
+
+// Protected routes
+router.get("/products/data", 
+  authMiddleware, 
+  (req, res, next) => {
+    console.log("User accessing endpoint:", req.user);
+    next();
+  },
+  getAllProductParamsController
+);
 router.post(
   "/products",
   upload.fields([

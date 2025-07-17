@@ -28,20 +28,70 @@ async function getAllProductController(req, res) {
 
 async function getAllProductParamsController(req, res) {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 5;
+    // Validate and parse query parameters
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = req.query.search || "";
+    const requestedTokoId = req.query.toko;
 
-    const produkData = await getAllProductParams({ page, limit, search });
+    // Get user info from auth middleware
+    const { role, toko_id: userTokoId } = req.user;
 
-    return res.status(200).json({
-      message: "Data produk berhasil di tampilkan",
-      data: produkData.data,
-      total: produkData.total,
+    // Authorization logic
+    let finalTokoId;
+    if (role === "admin") {
+      // Admin can see all or filter by toko_id
+      finalTokoId = requestedTokoId;
+    } else if (role === "toko" || role === "pemilik") {
+      // Toko users can only see their own products
+      if (requestedTokoId && requestedTokoId !== userTokoId) {
+        return res.status(403).json({
+          error: "Akses ditolak",
+          message: "Anda hanya bisa melihat produk toko Anda sendiri",
+          your_toko_id: userTokoId,
+        });
+      }
+      finalTokoId = userTokoId;
+    } else {
+      return res.status(403).json({
+        error: "Akses ditolak",
+        message: "Role tidak diizinkan mengakses endpoint ini",
+      });
+    }
+
+    // Calculate offset for pagination
+    const offset = (page - 1) * limit;
+
+    // Get data from service
+    const produkData = await getAllProductParams({
+      limit,
+      offset,
+      search,
+      toko_id: finalTokoId,
     });
+
+    // Prepare response
+    const response = {
+      success: true,
+      message: "Data produk berhasil diambil",
+      data: produkData.data,
+      meta: {
+        page,
+        limit,
+        total_items: produkData.total,
+        total_pages: Math.ceil(produkData.total / limit),
+        current_toko_id: finalTokoId,
+      },
+    };
+
+    return res.status(200).json(response);
   } catch (error) {
-    console.error("Error saat mengambil data produk:", error);
-    return res.status(500).json({ error: "Terjadi kesalahan pada server" });
+    console.error("Error in getAllProductParamsController:", error);
+    return res.status(500).json({
+      error: "Terjadi kesalahan server",
+      details: error.message,
+      stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+    });
   }
 }
 

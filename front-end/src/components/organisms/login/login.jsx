@@ -17,18 +17,34 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const res = await axios.post("http://localhost:3000/api/login", form);
-      const { token } = res.data;
+      const { token, user: userData, toko } = res.data; // Renamed to userData to avoid conflict
 
       const decoded = jwtDecode(token);
 
-      setAuth(token, {
-        user_id: decoded.user_id,
-        email: decoded.email,
-        username: decoded.username,
-        toko_id: decoded.toko_id,
-      });
+      setAuth(
+        token,
+        {
+          user_id: decoded.user_id,
+          email: decoded.email,
+          username: decoded.username,
+          role: decoded.role,
+        },
+        toko
+          ? {
+              toko_id: toko.toko_id,
+              nama_toko: toko.nama_toko,
+              no_telp: toko.no_telp,
+            }
+          : null,
+        decoded.role
+      );
 
-      navigate("/dashboard");
+      // Redirect based on role
+      if (decoded.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err) {
       alert(err.response?.data?.error || "Login gagal");
     }

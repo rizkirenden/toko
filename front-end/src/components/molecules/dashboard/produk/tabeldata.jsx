@@ -17,14 +17,13 @@ export const Tabeldata = ({ data, onEdit, onDelete }) => {
               <th className="border-b p-2 text-xs">Gambar Produk</th>
               <th className="border-b p-2 text-xs">Video Produk</th>
               <th className="border-b p-2 text-xs">Status</th>
-              <th className="border-b p-2 text-xs">Nama Toko</th>
-              <th className="border-b p-2 text-xs">No Telp</th>
               <th className="border-b p-2 text-xs">Nama Kategori</th>
+              <th className="border-b p-2 text-xs">Aksi</th>
             </tr>
           </thead>
           <tbody>
             {data?.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-100">
+              <tr key={item.product_id} className="hover:bg-gray-100">
                 <td className="border-b p-2 text-xs">{item.product_id}</td>
                 <td className="border-b p-2 text-xs">{item.name}</td>
                 <td className="border-b p-2 text-xs">{item.harga}</td>
@@ -49,11 +48,9 @@ export const Tabeldata = ({ data, onEdit, onDelete }) => {
                   />
                 </td>
                 <td className="border-b p-2 text-xs">{item.status}</td>
-                <td className="border-b p-2 text-xs">{item.nama_toko}</td>
-                <td className="border-b p-2 text-xs">{item.no_telp}</td>
                 <td className="border-b p-2 text-xs">{item.nama_kategori}</td>
                 <td className="border-b p-2 text-xs">
-                  <td className="flex gap-2">
+                  <div className="flex gap-2">
                     <button
                       onClick={() => onEdit(item)}
                       className="text-blue-500 hover:underline text-xs"
@@ -66,7 +63,7 @@ export const Tabeldata = ({ data, onEdit, onDelete }) => {
                     >
                       Hapus
                     </button>
-                  </td>
+                  </div>
                 </td>
               </tr>
             ))}

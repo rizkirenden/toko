@@ -36,16 +36,20 @@ const useProdukStore = create((set) => ({
     try {
       const auth = Authstore.getState();
 
-      if (!auth.toko?.toko_id) {
-        throw new Error("Anda harus login sebagai toko");
+      if (!auth.isAuthenticated) {
+        throw new Error("Anda harus login terlebih dahulu");
       }
 
       const params = new URLSearchParams({
         page,
         limit,
         search,
-        toko: auth.toko.toko_id,
       });
+
+      // Only add toko filter if user is a toko (not admin)
+      if (auth.role === "toko" && auth.toko?.toko_id) {
+        params.append("toko", auth.toko.toko_id);
+      }
 
       const response = await axios.get(
         `http://localhost:3000/api/products/data?${params.toString()}`
@@ -59,8 +63,26 @@ const useProdukStore = create((set) => ({
     } catch (err) {
       set({
         error: err.response?.data?.error || err.message,
+        produksData: [],
         loading: false,
       });
+    }
+  },
+
+  addProduks: async (formData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/products",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response?.data?.error || err.message;
     }
   },
 
