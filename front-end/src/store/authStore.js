@@ -6,12 +6,14 @@ const Authstore = create(
     (set) => ({
       token: null,
       user: null,
+      toko: null,
       isAuthenticated: false,
 
-      setAuth: (token, user) =>
+      setAuth: (token, user, toko) =>
         set({
           token,
           user,
+          toko,
           isAuthenticated: true,
         }),
 
@@ -19,6 +21,7 @@ const Authstore = create(
         set({
           token: null,
           user: null,
+          toko: null,
           isAuthenticated: false,
         }),
     }),

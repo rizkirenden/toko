@@ -1,5 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
+import Authstore from "./authStore";
 
 const useProdukStore = create((set) => ({
   produks: [],
@@ -33,13 +34,28 @@ const useProdukStore = create((set) => ({
   fetchProduksData: async ({ page = 1, limit = 5, search = "" } = {}) => {
     set({ loading: true, error: null });
     try {
-      const params = new URLSearchParams({ page, limit, search });
+      const auth = Authstore.getState(); // Ambil data auth
+      const params = new URLSearchParams({
+        page,
+        limit,
+        search,
+        toko: auth.toko?.toko_id,
+      });
+
       const response = await axios.get(
         `http://localhost:3000/api/products/data?${params.toString()}`
       );
-      set({ produksData: response.data.data, loading: false });
+
+      set({
+        produksData: response.data.data,
+        total: response.data.total || 1,
+        loading: false,
+      });
     } catch (err) {
-      set({ error: err.message, loading: false });
+      set({
+        error: err.response?.data?.error || err.message,
+        loading: false,
+      });
     }
   },
 
