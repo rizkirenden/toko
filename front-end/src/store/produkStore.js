@@ -34,12 +34,17 @@ const useProdukStore = create((set) => ({
   fetchProduksData: async ({ page = 1, limit = 5, search = "" } = {}) => {
     set({ loading: true, error: null });
     try {
-      const auth = Authstore.getState(); // Ambil data auth
+      const auth = Authstore.getState();
+
+      if (!auth.toko?.toko_id) {
+        throw new Error("Anda harus login sebagai toko");
+      }
+
       const params = new URLSearchParams({
         page,
         limit,
         search,
-        toko: auth.toko?.toko_id,
+        toko: auth.toko.toko_id,
       });
 
       const response = await axios.get(
@@ -56,23 +61,6 @@ const useProdukStore = create((set) => ({
         error: err.response?.data?.error || err.message,
         loading: false,
       });
-    }
-  },
-
-  addProduks: async (formData) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/products",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (err) {
-      throw err.response?.data?.error || err.message;
     }
   },
 
