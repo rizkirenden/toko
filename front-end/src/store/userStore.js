@@ -22,9 +22,10 @@ const useUserStore = create((set) => ({
       });
     }
   },
-
   addUsers: async ({ email, password, role, toko_id }) => {
     try {
+      console.log("Data yang dikirim:", { email, password, role, toko_id });
+
       const response = await axios.post(
         "http://localhost:3000/api/register",
         {
@@ -41,7 +42,7 @@ const useUserStore = create((set) => ({
       );
       return response.data;
     } catch (err) {
-      throw err.response?.data?.erorr || err.message;
+      throw err.response?.data?.error || err.message;
     }
   },
 

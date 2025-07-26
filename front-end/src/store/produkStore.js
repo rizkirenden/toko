@@ -46,13 +46,17 @@ const useProdukStore = create((set) => ({
         search,
       });
 
-      // Only add toko filter if user is a toko (not admin)
       if (auth.role === "toko" && auth.toko?.toko_id) {
         params.append("toko", auth.toko.toko_id);
       }
 
       const response = await axios.get(
-        `http://localhost:3000/api/products/data?${params.toString()}`
+        `http://localhost:3000/api/products/data?${params.toString()}`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
       );
 
       set({

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const upload = require("../middleware/upload");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const {
   getAllUserController,
@@ -77,20 +78,12 @@ router.delete("/tokos/:toko_id", deleteTokoController);
 router.get("/tokos/:toko_id", editTokoController);
 
 // Product (Produk)
-getAllProductParamsController
-} = require("../controllers/productController");
+router.get("/products", authMiddleware, getAllProductController);
+router.get("/products/data", authMiddleware, getAllProductParamsController);
 
-// Protected routes
-router.get("/products/data", 
-  authMiddleware, 
-  (req, res, next) => {
-    console.log("User accessing endpoint:", req.user);
-    next();
-  },
-  getAllProductParamsController
-);
 router.post(
   "/products",
+  authMiddleware,
   upload.fields([
     { name: "gambar_product", maxCount: 1 },
     { name: "video_product", maxCount: 1 },
@@ -100,6 +93,7 @@ router.post(
 
 router.put(
   "/products/:product_id",
+  authMiddleware,
   upload.fields([
     { name: "gambar_product", maxCount: 1 },
     { name: "video_product", maxCount: 1 },
@@ -107,7 +101,7 @@ router.put(
   updateProductController
 );
 
-router.delete("/products/:product_id", deleteProductController);
-router.get("/products/:product_id", editProductController);
+router.delete("/products/:product_id", authMiddleware, deleteProductController);
+router.get("/products/:product_id", authMiddleware, editProductController);
 
 module.exports = router;

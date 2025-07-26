@@ -2,19 +2,22 @@ const { verifyEmail } = require("../service/verifyEmailService");
 
 async function verifyEmailController(req, res) {
   try {
+    console.log("Verify Email Endpoint Hit!"); // Add this
+    console.log("Query params:", req.query); // Add this
+
     const { token } = req.query;
 
     if (!token) {
-      return res.status(400).json({ error: "Token diperlukan" });
+      console.log("No token provided"); // Add this
+      return res.status(400).send("Token diperlukan.");
     }
 
     await verifyEmail(token);
 
-    res.status(200).json({ message: "Email Verified Successfully" });
+    return res.redirect("http://localhost:5173/login?verified=1");
   } catch (error) {
-    res
-      .status(400)
-      .json({ error: error.message || "Invalid Verification Token" });
+    console.error("Verifikasi gagal:", error.message);
+    return res.status(400).send("Verifikasi gagal atau token tidak valid.");
   }
 }
 

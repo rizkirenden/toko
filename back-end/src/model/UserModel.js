@@ -9,11 +9,34 @@ const UserModel = {
   },
 
   async findByVerificationToken(token) {
-    const [rows] = await pool.query(
-      "SELECT * FROM users WHERE verification_token = ?",
-      [token]
-    );
-    return rows[0];
+    try {
+      const [rows] = await pool.query(
+        "SELECT * FROM users WHERE verification_token = ?",
+        [token]
+      );
+      if (rows.length === 0) {
+        console.log("No user found with token:", token);
+        return null;
+      }
+      return rows[0];
+    } catch (error) {
+      console.error("Error in findByVerificationToken:", error);
+      throw error;
+    }
+  },
+
+  async verifyEmail(token) {
+    try {
+      const [result] = await pool.query(
+        "UPDATE users SET is_verified = 1, verification_token = NULL WHERE verification_token = ?",
+        [token]
+      );
+      console.log("Update result:", result);
+      return result.affectedRows > 0;
+    } catch (error) {
+      console.error("Error in verifyEmail:", error);
+      throw error;
+    }
   },
 
   async getAllUser({ limit, offset, search } = {}) {
@@ -59,7 +82,7 @@ const UserModel = {
     INSERT INTO users (toko_id, email, password, role, verification_token, is_verified)
     VALUES (?, ?, ?, ?, ?, 0)
   `;
-    // Allow toko_id to be null for admin users
+
     const values = [
       toko_id || null,
       email,
@@ -67,10 +90,10 @@ const UserModel = {
       role,
       verificationToken,
     ];
+
     const [result] = await pool.query(query, values);
     return result.insertId;
   },
-
   async verifyEmail(token) {
     const [result] = await pool.query(
       "UPDATE users SET is_verified = 1, verification_token = NULL WHERE verification_token = ?",

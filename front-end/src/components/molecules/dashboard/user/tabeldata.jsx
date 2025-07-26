@@ -13,8 +13,8 @@ export const Tabeldata = ({ data, onEdit, onDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((item) => (
-            <tr key={item.id} className="hover:bg-gray-100">
+          {data?.map((item, index) => (
+            <tr key={item.user_id || index} className="hover:bg-gray-100">
               <td className="border-b p-2 text-xs">{item.user_id}</td>
               <td className="border-b p-2 text-xs">{item.email}</td>
               <td className="border-b p-2 text-xs">{item.role}</td>

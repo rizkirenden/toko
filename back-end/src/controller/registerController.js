@@ -32,6 +32,8 @@ async function getAllUserController(req, res) {
 async function registerUserController(req, res) {
   try {
     const userData = req.body;
+    console.log("Data diterima:", userData); // log debug
+
     const userId = await registerUser(userData);
 
     res.status(201).json({
@@ -39,6 +41,7 @@ async function registerUserController(req, res) {
       user_id: userId,
     });
   } catch (error) {
+    console.error("Register Error:", error.message);
     res.status(400).json({ error: error.message });
   }
 }

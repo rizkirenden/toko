@@ -24,9 +24,11 @@ async function registerUser(user) {
     throw new Error("Role tidak valid");
   }
 
-  // Make toko_id required only for pemilik (owner) role
-  if (role === "pemilik" && !toko_id) {
-    throw new Error("Toko ID diperlukan untuk role pemilik");
+  if (role === "pemilik") {
+    if (!toko_id) throw new Error("Toko ID diperlukan untuk role pemilik");
+    toko_id = Number(toko_id); // 👈 konversi ke number
+  } else {
+    toko_id = null;
   }
 
   const existingUser = await UserModel.findByEmail(email);
@@ -38,7 +40,7 @@ async function registerUser(user) {
   const verificationToken = crypto.randomBytes(32).toString("hex");
 
   const userId = await UserModel.create({
-    toko_id: role === "admin" ? null : toko_id, // Set toko_id to null for admin
+    toko_id,
     email,
     hashedPassword,
     role,
